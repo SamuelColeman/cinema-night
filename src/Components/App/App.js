@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import React, { Component } from 'react';
 import {  } from '.../apiCalls';
-
+import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import './App.css';
 
 class App extends Component {
@@ -13,14 +13,14 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
 
   }
 
   render() {
     return (
       <section className='app'>
-
+        <MoviesContainer movies={this.state.movies}/>
       </section>
     )
   }
