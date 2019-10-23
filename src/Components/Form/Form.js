@@ -15,13 +15,16 @@ class Form extends Component{
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
     console.log(this.state)
-    this.verifyLogIn()
   }
 
   verifyLogIn = () => {
     
     console.log('firing')
     // if()
+  }
+
+  verifySignUp = () => {
+    
   }
 
    render() {
@@ -39,8 +42,8 @@ class Form extends Component{
                    value={password} 
                    minLength='8' 
                    onChange={this.handleChange} />
-            <button onClick={this.verifyLogIn}>Sign Up</button>
-            <button onClick={this.verifyLogIn}>Sign In</button>
+            <button onClick={this.verifySignUp}>Sign Up</button>
+            <button onClick={this.verifySignIn}>Sign In</button>
         </form>
       )
    }
