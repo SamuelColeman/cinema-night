@@ -1,7 +1,5 @@
-import React from 'react';
-import logo from './logo.svg';
 import React, { Component } from 'react';
-import {  } from '.../apiCalls';
+import { currentMovies } from '../../apiCalls';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import './App.css';
 
@@ -9,12 +7,18 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      movies : []
+      movies : [],
+      error: ''
     }
   }
 
   async componentDidMount() {
-
+    try {
+      const movies = await currentMovies();
+      this.setState({ movies: movies })
+    } catch (error) {
+      this.setState({ error : error.message })
+    }
   }
 
   render() {

@@ -2,9 +2,11 @@ import React from 'react';
 import MovieCard from '../MovieCard/MovieCard';
 
 const MoviesContainer = ({ movies }) => {
+    console.log(movies)
   const loopMovies = movies.map((movie) => {
       console.log(movie);
-      return <MovieCard />
+      return <MovieCard key={movie.id}
+                        {...movie} />
   })
     return (
         <section className='movie-container'>

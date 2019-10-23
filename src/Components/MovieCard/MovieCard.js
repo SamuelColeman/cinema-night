@@ -1,10 +1,11 @@
 import React from 'react';
 
-const MovieCard = () => {
+const MovieCard = ({ title, poster_path }) => {
 
     return (
         <section>
-            <p></p>
+            <p>{ title }</p>
+            <img src={poster_path} />
         </section>
     )
 }
