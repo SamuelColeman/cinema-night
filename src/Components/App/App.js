@@ -1,34 +1,49 @@
 import React, { Component } from 'react';
 import { currentMovies } from '../../apiCalls';
+import { getMovies, isLoading, hasError } from '../../actions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import './App.css';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      movies : [],
-      error: ''
-    }
-  }
 
   async componentDidMount() {
+    const { getMovies, hasError, isLoading } = this.props;
     try {
+      isLoading(true);
       const movies = await currentMovies();
-      this.setState({ movies: movies })
+      isLoading(false)
+      getMovies(movies);
     } catch (error) {
-      this.setState({ error : error.message })
+      hasError(error.message)
     }
   }
 
   render() {
+    const { movies, errorMsg } = this.props;
     return (
       <section className='app'>
-        <MoviesContainer movies={this.state.movies}/>
+        <MoviesContainer movies={movies} errorMsg={errorMsg} />
       </section>
     )
   }
 
 }
 
-export default App;
+export const mapStateToProps = ({movies, error}) => ({
+  movies,
+  error
+});
+
+export const mapDispatchToProps = (dispatch) => (
+  bindActionCreators({
+    getMovies,
+    isLoading,
+    hasError
+  }, dispatch)
+)
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
