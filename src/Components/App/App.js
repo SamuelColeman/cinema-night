@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import Form from '../Form/Form';
+import { Route } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
