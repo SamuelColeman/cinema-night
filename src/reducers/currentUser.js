@@ -1,5 +1,5 @@
 export const currentUser = (state={}, action) => {
-  console.log('firing')
+  console.log(' current user firing')
   switch(action.type){
     case 'LOGIN_USER':
       return {

@@ -29,7 +29,6 @@ class Form extends Component{
       password: this.state.password
     })
     if(resp.id) {
-      console.log(this.props)
       this.props.login({
         name:resp.name,
         id: resp.id,
@@ -39,11 +38,7 @@ class Form extends Component{
     } else {
       this.setState({error:resp.error})
     }
-    // const { login } = this.props;
-    // login({
-    //  email: this.state.email,
-    //  password: this.state.password
-    // })
+    console.log(this.props.currentUser)
   }
 
   verifySignIn = (e) => {
@@ -82,5 +77,4 @@ export const mapDispatchToProps = (dispatch) => (
     }, dispatch)
 )
 
-// export default Form;
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
