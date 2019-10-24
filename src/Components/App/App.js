@@ -22,20 +22,29 @@ class App extends Component {
     }
   }
 
+  signOutUser = () => {
+    let { currentUser } = this.props;
+    currentUser.name = '';
+    currentUser.id = null;
+    currentUser.isSignedIn=false;
+    console.log(currentUser)
+  }
+
   render() {
     const { movies, errorMsg } = this.props;
     return (
       <section className='app'>
         <Route exact path='/login' render={() => <Form /> } />
-        <Route exact path='/' render={() => <MoviesContainer className='movie_container'/> } />
+        <Route exact path='/' render={() => <MoviesContainer className='movie_container' signOutUser={this.signOutUser}/> } />
       </section>
     )
   }
 }
 
-export const mapStateToProps = ({movies, error}) => ({
+export const mapStateToProps = ({ movies, error, currentUser }) => ({
   movies,
-  error
+  error,
+  currentUser
 });
 
 export const mapDispatchToProps = (dispatch) => (
