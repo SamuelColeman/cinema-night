@@ -35,6 +35,8 @@ class Form extends Component{
         isSignedIn: true
       })
       this.setState({ error: ''})
+    } else {
+      this.setState({error:resp.error})
     }
     // const { login } = this.props;
     // login({

@@ -5,10 +5,10 @@ export const currentMovies = async () => {
   return data.results;
 }
 
-export const loginVerification = async (userInfo) => {
+export const loginVerification = async (info) => {
   const options = {
     method: 'POST',
-    body: JSON.stringify(userInfo),
+    body: JSON.stringify(info),
     headers: {
       'Content-Type': 'application/json'
     }
