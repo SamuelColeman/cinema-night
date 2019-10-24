@@ -18,6 +18,7 @@ export const loginVerification = async (info) => {
 
   const resp = await fetch('http://localhost:3001/api/v1/login', options)
   const data = await resp.json();
+  console.log('fetch data-->', data)
   return data
 }
 

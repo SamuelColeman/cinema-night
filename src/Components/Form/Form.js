@@ -35,11 +35,11 @@ class Form extends Component{
         id: resp.id,
         isSignedIn: true
       })
-      console.log(this.props.name)
-      this.setState({ error: ''})
-    } else {
-      this.setState({error:resp.error.details})
-     
+    }
+      if(resp.error !== undefined) {
+        this.setState({error: 'Email and password do not match.'})
+      } else {
+      this.setState({error: ''})
     }
   }
 
