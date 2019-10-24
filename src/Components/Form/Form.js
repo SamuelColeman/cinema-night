@@ -29,6 +29,7 @@ class Form extends Component{
       password: this.state.password
     })
     if(resp.id) {
+      console.log(this.props)
       this.props.login({
         name:resp.name,
         id: resp.id,
@@ -71,17 +72,15 @@ class Form extends Component{
    }
 }
 
-export const mapStateToProps = ({ email, password }) => ({
-    email,
-    password
+export const mapStateToProps = ({ currentUser}) => ({
+    currentUser
 })
 
 export const mapDispatchToProps = (dispatch) => (
     bindActionCreators({
-      login,
-      // getPassword
+    login: info => dispatch(login(info))
     }, dispatch)
 )
 
-export default Form;
-// export default connect(mapStateToProps)(Form);
+// export default Form;
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
