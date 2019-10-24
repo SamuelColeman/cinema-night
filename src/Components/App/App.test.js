@@ -1,10 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import App from './App';
+import { currentMovies } from '../../apiCalls';
 
-// it('renders without crashing', () => {
-//   const div = document.createElement('div');
-//   ReactDOM.render(<App />, div);
-//   ReactDOM.unmountComponentAtNode(div);
-// });
+jest.mock('../../apiCalls');
+
+describe('App', () => {
+
+  let wrapper;
+  let mockCurrentMovie;
+
+  
+})
+
  
