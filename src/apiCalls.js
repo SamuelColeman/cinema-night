@@ -15,6 +15,6 @@ export const loginVerification = async (userInfo) => {
   }
 
   const resp = await fetch('http://localhost:3001/api/v1/login', options)
-  const data = await response.json();
+  const data = await resp.json();
   return data
 }

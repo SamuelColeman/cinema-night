@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import { getEmail, getPassword } from '../../actions';
 import { login } from '../../actions'
+// import { Redirect } from 'react-router-dom';
+import { loginVerification } from '../../apiCalls'
 
 class Form extends Component{
   constructor() {
@@ -19,14 +21,26 @@ class Form extends Component{
     console.log(this.state)
   }
 
-  verifySignUp = (e) => {
+  verifySignUp = async e => {
     e.preventDefault()
     console.log('state', this.state)
-    // const { login } = this.props;
-    login({
-     email: this.state.email,
-     password: this.state.password
+    const resp = await loginVerification({
+      email: this.state.email,
+      password: this.state.password
     })
+    if(resp.id) {
+      this.props.login({
+        name:resp.name,
+        id: resp.id,
+        isSignedIn: true
+      })
+      this.setState({ error: ''})
+    }
+    // const { login } = this.props;
+    // login({
+    //  email: this.state.email,
+    //  password: this.state.password
+    // })
   }
 
   verifySignIn = (e) => {

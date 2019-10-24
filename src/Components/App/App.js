@@ -28,6 +28,7 @@ class App extends Component {
     return (
       <section className='app'>
         {/* <MoviesContainer movies={movies} errorMsg={errorMsg} /> */}
+        <Route exact path='/login' render={() => <Form /> } />
         <Form />
       </section>
     )
