@@ -11,7 +11,8 @@ class Form extends Component{
     super();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      error: ''
     }
   }
 
@@ -37,28 +38,34 @@ class Form extends Component{
       console.log(this.props.name)
       this.setState({ error: ''})
     } else {
-      this.setState({error:resp.error})
+      this.setState({error:resp.error.details})
+     
     }
   }
 
   verifySignUp = async e => {
     e.preventDefault()
     const resp = await signUpVerification({
-      name: 'me',
+      name: 'pants',
       email: this.state.email,
       password: this.state.password
     })
+    if(resp.error !== undefined) {
+      this.setState({error: 'Email is taken, try another.'})
+    } else {
+      this.setState({error: ''})
+    }
     if(!resp.email) {
       this.props.signUp({
-       name: 'me',
+       name: 'pants',
        email: this.state.email,
        password: this.state.password
       })
-    }
+    } 
   }
 
    render() {
-     const { email, password } = this.state;
+     const { email, password, error } = this.state;
     return (
         <form>
             <input placeholder='Email' 
@@ -66,6 +73,7 @@ class Form extends Component{
                    name='email'
                    value={email} 
                    onChange={this.handleChange} />
+            <h1>{error}</h1>
             <input placeholder='Password must 8 characters' 
                    type='password'
                    name='password'
