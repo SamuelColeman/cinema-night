@@ -26,8 +26,9 @@ class App extends Component {
     const { movies, errorMsg } = this.props;
     return (
       <section className='app'>
-        {/* <MoviesContainer movies={movies} errorMsg={errorMsg} /> */}
         <Route exact path='/login' render={() => <Form /> } />
+        <h1>Now Playing</h1>
+        <MoviesContainer className='movie_container' movies={movies} errorMsg={errorMsg} />
         <Form />
       </section>
     )
