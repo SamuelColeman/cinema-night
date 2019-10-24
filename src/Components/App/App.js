@@ -27,7 +27,7 @@ class App extends Component {
     const { movies, errorMsg } = this.props;
     return (
       <section className='app'>
-        {/* <MoviesContainer movies={movies} errorMsg={errorMsg} /> */}
+        <MoviesContainer movies={movies} errorMsg={errorMsg} />
         <Form />
       </section>
     )
