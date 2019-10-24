@@ -1,5 +1,6 @@
 import React from 'react';
 import MovieCard from '../MovieCard/MovieCard';
+import './MoviesContainer.css';
 
 const MoviesContainer = ({ movies }) => {
     console.log(movies)
@@ -9,7 +10,7 @@ const MoviesContainer = ({ movies }) => {
                         {...movie} />
   })
     return (
-        <section className='movie-container'>
+        <section className='movies-containers'>
           {loopMovies}
         </section>
     )
