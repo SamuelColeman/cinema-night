@@ -21,3 +21,12 @@ export const login = ({ name, id, isSignedIn }) => {
     isSignedIn
   })
 }
+
+export const signUp = ({ name, email, password }) => {
+  return ({
+    type: 'SIGN_UP_USER',
+    name,
+    email,
+    password
+  })
+}
