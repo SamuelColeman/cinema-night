@@ -4,6 +4,7 @@ import { getMovies, isLoading, hasError } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import Form from '../Form/Form';
 import './App.css';
 
 class App extends Component {
@@ -20,16 +21,18 @@ class App extends Component {
     }
   }
 
+  
+
   render() {
     const { movies, errorMsg } = this.props;
     return (
       <section className='app'>
         <h1>Now Playing</h1>
         <MoviesContainer className='movie_container' movies={movies} errorMsg={errorMsg} />
+        <Form />
       </section>
     )
   }
-
 }
 
 export const mapStateToProps = ({movies, error}) => ({

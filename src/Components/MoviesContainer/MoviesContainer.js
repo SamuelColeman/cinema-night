@@ -14,6 +14,6 @@ const MoviesContainer = ({ movies }) => {
           {loopMovies}
         </section>
     )
-}
+} 
 
 export default MoviesContainer;
