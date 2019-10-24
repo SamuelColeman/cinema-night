@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getEmail, getPassword } from '../../actions';
+// import { getEmail, getPassword } from '../../actions';
+import { login } from '../../actions'
 
 class Form extends Component{
   constructor() {
@@ -13,18 +14,23 @@ class Form extends Component{
   }
 
   handleChange = (e) => {
+    e.preventDefault()
     this.setState({ [e.target.name]: e.target.value });
     console.log(this.state)
   }
 
-  verifyLogIn = () => {
-    
-    console.log('firing')
-    // if()
+  verifySignUp = (e) => {
+    e.preventDefault()
+    console.log('state', this.state)
+    // const { login } = this.props;
+    login({
+     email: this.state.email,
+     password: this.state.password
+    })
   }
 
-  verifySignUp = () => {
-    
+  verifySignIn = (e) => {
+    e.preventDefault()
   }
 
    render() {
@@ -56,8 +62,8 @@ export const mapStateToProps = ({ email, password }) => ({
 
 export const mapDispatchToProps = (dispatch) => (
     bindActionCreators({
-      getEmail,
-      getPassword
+      login,
+      // getPassword
     }, dispatch)
 )
 

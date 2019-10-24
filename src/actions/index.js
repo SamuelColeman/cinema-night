@@ -13,12 +13,15 @@ export const hasError = (errorMsg) => ({
   errorMsg
 })
 
-export const login = ({ name, id, isSignedIn}) => {
+export const login = ({ email, password }) => {
+  console.log('email', email, 'password', password)
   return ({
     type: 'LOGIN_USER',
-    name,
-    id,
-    isSignedIn
+    email,
+    password
+    // name,
+    // id,
+    // isSignedIn
   })
 }
 
