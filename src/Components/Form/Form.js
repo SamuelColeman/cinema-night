@@ -38,7 +38,6 @@ class Form extends Component{
     } else {
       this.setState({error:resp.error})
     }
-    console.log(this.props.currentUser)
   }
 
   verifySignIn = (e) => {

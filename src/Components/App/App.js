@@ -22,8 +22,6 @@ class App extends Component {
     }
   }
 
-  
-
   render() {
     const { movies, errorMsg } = this.props;
     return (
@@ -34,7 +32,6 @@ class App extends Component {
       </section>
     )
   }
-
 }
 
 export const mapStateToProps = ({movies, error}) => ({
@@ -49,7 +46,5 @@ export const mapDispatchToProps = (dispatch) => (
     hasError
   }, dispatch)
 )
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

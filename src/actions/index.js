@@ -21,13 +21,3 @@ export const login = ({ name, id, isSignedIn }) => {
     isSignedIn
   })
 }
-
-// export const getEmail = (email) => ({
-//   type: 'GET_EMAIL',
-//   email
-// })
-
-// export const getPassword = (password) => ({
-//   type: 'GET_PASSWORD',
-//   password
-// })
