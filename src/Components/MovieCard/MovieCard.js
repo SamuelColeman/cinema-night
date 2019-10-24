@@ -5,9 +5,9 @@ const MovieCard = ({ title, poster_path }) => {
     return (
         <section>
             <p>{ title }</p>
-            <img src={poster_path} />
+            <img src={poster_path} alt={title}/>
         </section>
     )
-}
+} 
 
 export default MovieCard;
