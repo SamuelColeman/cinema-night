@@ -4,7 +4,7 @@ import './MovieCard.css';
 const MovieCard = ({ title, poster_path, overview, id }) => {
 
     return (
-        <section className='movie_card' onClick={() => document.getElementById(id).removeAttribute('hidden')}>
+        <section className='movie_card' onClick={() => document.getElementById(id).toggleAttribute('hidden')}>
             <h1>{ title }</h1>
             <img src={poster_path} />
             <button type='button'>Favorite</button>
