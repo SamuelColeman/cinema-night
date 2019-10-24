@@ -6,3 +6,17 @@ export const currentMovies = async () => {
   })
   return data.results;
 }
+
+export const loginVerification = async (info) => {
+  const options = {
+    method: 'POST',
+    body: JSON.stringify(info),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  const resp = await fetch('http://localhost:3001/api/v1/login', options)
+  const data = await resp.json();
+  return data
+}

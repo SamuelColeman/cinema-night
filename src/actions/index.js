@@ -13,12 +13,11 @@ export const hasError = (errorMsg) => ({
   errorMsg
 })
 
-export const getEmail = (email) => ({
-  type: 'GET_EMAIL',
-  email
-})
-
-export const getPassword = (password) => ({
-  type: 'GET_PASSWORD',
-  password
-})
+export const login = ({ name, id, isSignedIn }) => {
+  return ({
+    type: 'LOGIN_USER',
+    name,
+    id,
+    isSignedIn
+  })
+}

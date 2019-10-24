@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import Form from '../Form/Form';
+import { Route } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
@@ -21,12 +22,11 @@ class App extends Component {
     }
   }
 
-  
-
   render() {
     const { movies, errorMsg } = this.props;
     return (
       <section className='app'>
+        <Route exact path='/login' render={() => <Form /> } />
         <h1>Now Playing</h1>
         <MoviesContainer className='movie_container' movies={movies} errorMsg={errorMsg} />
         <Form />
@@ -47,7 +47,5 @@ export const mapDispatchToProps = (dispatch) => (
     hasError
   }, dispatch)
 )
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

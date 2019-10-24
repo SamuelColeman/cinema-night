@@ -1,53 +1,79 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getEmail, getPassword } from '../../actions';
+// import { getEmail, getPassword } from '../../actions';
+import { login } from '../../actions'
+// import { Redirect } from 'react-router-dom';
+import { loginVerification } from '../../apiCalls'
 
 class Form extends Component{
- 
-   handleEmail = (e) => {
-    const { getEmail } = this.props;
-    // console.log(e.target.value);
-    getEmail(e.target.value);
-   }
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: ''
+    }
+  }
 
-   handlePassword = (e) => {
-    const { getPassword } = this.props;
-    getPassword(e.target.value);
-   }
+  handleChange = (e) => {
+    e.preventDefault()
+    this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state)
+  }
+
+  verifySignUp = async e => {
+    e.preventDefault()
+    console.log('state', this.state)
+    const resp = await loginVerification({
+      email: this.state.email,
+      password: this.state.password
+    })
+    if(resp.id) {
+      this.props.login({
+        name:resp.name,
+        id: resp.id,
+        isSignedIn: true
+      })
+      this.setState({ error: ''})
+    } else {
+      this.setState({error:resp.error})
+    }
+  }
+
+  verifySignIn = (e) => {
+    e.preventDefault()
+  }
 
    render() {
-     const { email, password } = this.props;
+     const { email, password } = this.state;
     return (
         <form>
             <input placeholder='Email' 
                    type='email'
                    name='email'
                    value={email} 
-                   onChange={this.handleEmail} />
+                   onChange={this.handleChange} />
             <input placeholder='Password must 8 characters' 
                    type='password'
                    name='password'
                    value={password} 
                    minLength='8' 
-                   onChange={this.handlePassword} />
-            <button>Sign Up</button>
-            <button>Sign In</button>
+                   onChange={this.handleChange} />
+            <button onClick={this.verifySignUp}>Sign Up</button>
+            <button onClick={this.verifySignIn}>Sign In</button>
         </form>
       )
    }
 }
 
-export const mapStateToProps = ({ email, password }) => ({
-    email,
-    password
+export const mapStateToProps = ({ currentUser}) => ({
+    currentUser
 })
 
 export const mapDispatchToProps = (dispatch) => (
     bindActionCreators({
-      getEmail,
-      getPassword
+    login: info => dispatch(login(info))
     }, dispatch)
 )
 
-export default connect(mapStateToProps)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
