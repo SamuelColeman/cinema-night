@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import { getEmail, getPassword } from '../../actions';
-import { login } from '../../actions'
+import { login, signUp } from '../../actions'
 // import { Redirect } from 'react-router-dom';
-import { loginVerification } from '../../apiCalls'
+import { loginVerification, signUpVerification } from '../../apiCalls'
 
 class Form extends Component{
   constructor() {
@@ -21,7 +21,7 @@ class Form extends Component{
     console.log(this.state)
   }
 
-  verifySignUp = async e => {
+  verifySignIn = async e => {
     e.preventDefault()
     console.log('state', this.state)
     const resp = await loginVerification({
@@ -34,14 +34,27 @@ class Form extends Component{
         id: resp.id,
         isSignedIn: true
       })
+      console.log(this.props.name)
       this.setState({ error: ''})
     } else {
       this.setState({error:resp.error})
     }
   }
 
-  verifySignIn = (e) => {
+  verifySignUp = async e => {
     e.preventDefault()
+    const resp = await signUpVerification({
+      name: 'me',
+      email: this.state.email,
+      password: this.state.password
+    })
+    if(!resp.email) {
+      this.props.signUp({
+       name: 'me',
+       email: this.state.email,
+       password: this.state.password
+      })
+    }
   }
 
    render() {
@@ -66,13 +79,15 @@ class Form extends Component{
    }
 }
 
-export const mapStateToProps = ({ currentUser}) => ({
-    currentUser
+export const mapStateToProps = ({ currentUser, users }) => ({
+    currentUser,
+    users
 })
 
 export const mapDispatchToProps = (dispatch) => (
     bindActionCreators({
-    login: info => dispatch(login(info))
+    login: info => dispatch(login(info)),
+    signUp: info  => dispatch(signUp(info))
     }, dispatch)
 )
 
