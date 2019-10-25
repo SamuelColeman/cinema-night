@@ -2,7 +2,7 @@
 
 exports[`MoviesContainer should match snapshot with all data being passed in correctly 1`] = `
 <section
-  className="movie-container"
+  className="movies-containers"
 >
   <MovieCard
     id={456}

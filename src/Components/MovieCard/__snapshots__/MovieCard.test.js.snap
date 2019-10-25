@@ -1,10 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MovieCard should match snapshot with all data passing through correctly 1`] = `
-<section>
-  <p>
+<section
+  className="movie_card"
+  onClick={[Function]}
+>
+  <h1>
     Harry Potter and the Sorceres Stone
-  </p>
-  <img />
+  </h1>
+  <img
+    alt="Harry Potter and the Sorceres Stone"
+  />
+  <button
+    type="button"
+  >
+    Favorite
+  </button>
+  <p
+    hidden={true}
+    id={456}
+  />
 </section>
 `;

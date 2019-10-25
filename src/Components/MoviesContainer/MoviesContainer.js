@@ -11,7 +11,7 @@ const MoviesContainer = ({ movies }) => {
         <section className='movies-containers'>
           {loopMovies}
         </section>
-    )
+    ) 
 } 
 
 export default MoviesContainer;

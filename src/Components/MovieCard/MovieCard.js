@@ -11,6 +11,6 @@ const MovieCard = ({ title, poster_path, overview, id }) => {
             <p id={id} hidden>{ overview }</p>
         </section>
     )
-} 
+}  
 
 export default MovieCard;
