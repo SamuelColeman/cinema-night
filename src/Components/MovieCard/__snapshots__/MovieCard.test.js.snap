@@ -1,10 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieCard should match snapshot with all data passing through correctly 1`] = `
-<section>
-  <p>
-    Harry Potter and the Sorceres Stone
-  </p>
-  <img />
-</section>
-`;
+exports[`MovieCard should match snapshot with all data passing through correctly 1`] = `undefined`;

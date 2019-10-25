@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { currentMovies } from '../../apiCalls';
-import { getMovies, isLoading, hasError } from '../../actions';
+import { getMovies, isLoading, hasError, isFavourite } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
@@ -30,28 +30,45 @@ class App extends Component {
     console.log(currentUser)
   }
 
+  toggleFavourites = (id) => {
+    let { movies, currentUser, favourite, isFavourite } = this.props;
+    let currentMovie =  movies.find(movie => movie.id === id);
+    isFavourite(!favourite)
+    favourite = !favourite;
+    if (favourite === true) {
+      currentUser.hasFavourites.push(currentMovie)
+    } else {
+      currentUser.hasFavourites = currentUser.hasFavourites.filter(movie => movie !== currentMovie)
+    }
+    console.log(currentUser)
+    console.log(favourite)
+    return favourite;
+  }
+
   render() {
-    const { movies, errorMsg } = this.props;
     return (
       <section className='app'>
         <Route exact path='/login' render={() => <Form /> } />
-        <Route exact path='/' render={() => <MoviesContainer className='movie_container' signOutUser={this.signOutUser}/> } />
+        <Route exact path='/' render={() => <MoviesContainer className='movie_container' signOutUser={this.signOutUser} toggleFavourites = {this.toggleFavourites} /> } />
       </section>
     )
   }
 }
 
-export const mapStateToProps = ({ movies, error, currentUser }) => ({
-  movies,
-  error,
-  currentUser
+export const mapStateToProps = (state) => ({
+  // ({ movies, error, currentUser, favourite })
+  movies: state.movies,
+  error: state.error,
+  currentUser: state.currentUser,
+  favourite: state.favourite
 });
 
 export const mapDispatchToProps = (dispatch) => (
   bindActionCreators({
     getMovies,
     isLoading,
-    hasError
+    hasError,
+    isFavourite
   }, dispatch)
 )
 
