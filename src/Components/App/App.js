@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import Form from '../Form/Form';
-import { Route } from 'react-router-dom';
+import { Route, NavLink, Link } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
@@ -22,22 +22,29 @@ class App extends Component {
     }
   }
 
+  signOutUser = () => {
+    let { currentUser } = this.props;
+    currentUser.name = '';
+    currentUser.id = null;
+    currentUser.isSignedIn=false;
+    console.log(currentUser)
+  }
+
   render() {
     const { movies, errorMsg } = this.props;
     return (
       <section className='app'>
         <Route exact path='/login' render={() => <Form /> } />
-        <h1>Now Playing</h1>
-        <MoviesContainer className='movie_container' movies={movies} errorMsg={errorMsg} />
-        <Form />
+        <Route exact path='/' render={() => <MoviesContainer className='movie_container' signOutUser={this.signOutUser}/> } />
       </section>
     )
   }
 }
 
-export const mapStateToProps = ({movies, error}) => ({
+export const mapStateToProps = ({ movies, error, currentUser }) => ({
   movies,
-  error
+  error,
+  currentUser
 });
 
 export const mapDispatchToProps = (dispatch) => (
