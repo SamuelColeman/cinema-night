@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { currentMovies } from '../../apiCalls';
-import { getMovies, isLoading, hasError } from '../../actions';
+import { getMovies, isLoading, hasError, isFavourite } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
@@ -31,16 +31,17 @@ class App extends Component {
   }
 
   toggleFavourites = (id) => {
-    let { movies, currentUser, favourite } = this.props;
-    let movie =  movies.find(movie => movie.id === id);
+    let { movies, currentUser, favourite, isFavourite } = this.props;
+    let currentMovie =  movies.find(movie => movie.id === id);
+    isFavourite(!favourite)
+    favourite = !favourite;
     if (favourite === true) {
-      currentUser.hasFavourites.push(movie)
+      currentUser.hasFavourites.push(currentMovie)
+    } else {
+      currentUser.hasFavourites = currentUser.hasFavourites.filter(movie => movie !== currentMovie)
     }
-    // e.stopPropagation()
-    // console.log(favourite = !favourite);
-    favourite = !favourite
-    console.log(favourite)
     console.log(currentUser)
+    console.log(favourite)
     return favourite;
   }
 
@@ -59,14 +60,15 @@ export const mapStateToProps = (state) => ({
   movies: state.movies,
   error: state.error,
   currentUser: state.currentUser,
-  favourite: !state.favourite
+  favourite: state.favourite
 });
 
 export const mapDispatchToProps = (dispatch) => (
   bindActionCreators({
     getMovies,
     isLoading,
-    hasError
+    hasError,
+    isFavourite
   }, dispatch)
 )
 
