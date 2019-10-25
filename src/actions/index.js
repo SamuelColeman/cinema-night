@@ -30,3 +30,10 @@ export const signUp = ({ name, email, password }) => {
     password
   })
 }
+
+export const isFavourite = (bool) => {
+  return ({
+    type: 'IS_FAVOURITE',
+    bool
+  })
+}
