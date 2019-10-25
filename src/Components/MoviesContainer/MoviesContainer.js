@@ -4,9 +4,10 @@ import './MoviesContainer.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const MoviesContainer = ({ currentUser, movies }) => {
+const MoviesContainer = ({ currentUser, movies, signOutUser }) => {
+  console.log(currentUser)
   let button;
-  if (currentUser.isSignedIn === false) {
+  if (currentUser.name === undefined) {
     button = (
       <Link to='/login'>
         <button>Sign In</button>
@@ -15,7 +16,7 @@ const MoviesContainer = ({ currentUser, movies }) => {
   } else {
     button = (
       <Link to='/login'>
-        <button>Sign Out</button>
+        <button onClick={signOutUser}>Sign Out</button>
       </Link>
     )
   }
