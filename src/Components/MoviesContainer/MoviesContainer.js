@@ -4,8 +4,7 @@ import './MoviesContainer.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const MoviesContainer = ({ currentUser, movies, signOutUser }) => {
-  console.log(currentUser)
+const MoviesContainer = ({ currentUser, movies, signOutUser, toggleFavourites }) => {
   let button;
   if (currentUser.name === undefined) {
     button = (
@@ -22,6 +21,7 @@ const MoviesContainer = ({ currentUser, movies, signOutUser }) => {
   }
   const loopMovies = movies.map((movie) => {
       return <MovieCard key={movie.id}
+                        toggleFavourites={toggleFavourites}
                         {...movie} />
   })
     return (

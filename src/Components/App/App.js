@@ -30,21 +30,31 @@ class App extends Component {
     console.log(currentUser)
   }
 
+  toggleFavourites = () => {
+    // e.stopPropagation()
+    let { favourite } = this.props;
+    // console.log(favourite = !favourite);
+    console.log(favourite)
+    // favourite = !favourite
+    return favourite;
+  }
+
   render() {
-    const { movies, errorMsg } = this.props;
     return (
       <section className='app'>
         <Route exact path='/login' render={() => <Form /> } />
-        <Route exact path='/' render={() => <MoviesContainer className='movie_container' signOutUser={this.signOutUser}/> } />
+        <Route exact path='/' render={() => <MoviesContainer className='movie_container' signOutUser={this.signOutUser} toggleFavourites = {this.toggleFavourites} /> } />
       </section>
     )
   }
 }
 
-export const mapStateToProps = ({ movies, error, currentUser }) => ({
-  movies,
-  error,
-  currentUser
+export const mapStateToProps = (state) => ({
+  // ({ movies, error, currentUser, favourite })
+  movies: state.movies,
+  error: state.error,
+  currentUser: state.currentUser,
+  favourite: !state.favourite
 });
 
 export const mapDispatchToProps = (dispatch) => (

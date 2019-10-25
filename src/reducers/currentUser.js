@@ -4,7 +4,8 @@ export const currentUser = (state={}, action) => {
       return {
         name: action.name,
         id: action.id,
-        isSignedIn: action.isSignedIn
+        isSignedIn: action.isSignedIn,
+        hasFavourites: [...action.hasFavourites]
       };
       default:
         return state;

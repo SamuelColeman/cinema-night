@@ -1,24 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MoviesContainer should match snapshot with all data being passed in correctly 1`] = `
-<section
-  className="movies-containers"
->
-  <MovieCard
-    id={456}
-    key="456"
-    popularity={462.91}
-    title="Harry Potter and the Sorceres Stone"
-    video={false}
-    vote_count={3775}
-  />
-  <MovieCard
-    id={123}
-    key="123"
-    popularity={462.91}
-    title="Harry Potter and the Sorceres Stone"
-    video={false}
-    vote_count={3775}
-  />
-</section>
-`;
+exports[`MoviesContainer should match snapshot with all data being passed in correctly 1`] = `undefined`;

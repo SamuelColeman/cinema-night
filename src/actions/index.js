@@ -13,12 +13,13 @@ export const hasError = (errorMsg) => ({
   errorMsg
 })
 
-export const login = ({ name, id, isSignedIn }) => {
+export const login = ({ name, id, isSignedIn, hasFavourites }) => {
   return ({
     type: 'LOGIN_USER',
     name,
     id,
-    isSignedIn
+    isSignedIn,
+    hasFavourites
   })
 }
 
