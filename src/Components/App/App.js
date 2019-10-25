@@ -30,26 +30,12 @@ class App extends Component {
     console.log(currentUser)
   }
 
-  toggleFavourites = (id) => {
-    let { movies, currentUser, favourite, isFavourite } = this.props;
-    let currentMovie =  movies.find(movie => movie.id === id);
-    isFavourite(!favourite)
-    favourite = !favourite;
-    if (favourite === true) {
-      currentUser.hasFavourites.push(currentMovie)
-    } else {
-      currentUser.hasFavourites = currentUser.hasFavourites.filter(movie => movie !== currentMovie)
-    }
-    console.log(currentUser)
-    console.log(favourite)
-    return favourite;
-  }
 
   render() {
     return (
       <section className='app'>
         <Route exact path='/login' render={() => <Form /> } />
-        <Route exact path='/' render={() => <MoviesContainer className='movie_container' signOutUser={this.signOutUser} toggleFavourites = {this.toggleFavourites} /> } />
+        <Route exact path='/' render={() => <MoviesContainer className='movie_container' signOutUser={this.signOutUser} /> } />
       </section>
     )
   }

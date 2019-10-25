@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { login, signUp } from '../../actions'
 import MoviesContainer from '../MoviesContainer/MoviesContainer'
 import { Route, Link } from 'react-router-dom';
-import { loginVerification, signUpVerification } from '../../apiCalls'
+import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls'
 
 class Form extends Component{
   constructor() {
@@ -36,12 +36,20 @@ class Form extends Component{
         id: resp.id,
         isSignedIn: true
       })
+      this.showFavourites(resp.id)
     }
       if(resp.error !== undefined) {
         this.setState({error: 'Email and password do not match.'})
       } else {
       this.setState({error: ''})
     }
+  }
+
+  showFavourites = async (id) => {
+      
+      const resp = await getFavourites(id);
+
+      console.log(resp);
   }
 
   verifySignUp = async e => {

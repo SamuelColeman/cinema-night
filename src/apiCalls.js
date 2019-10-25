@@ -7,7 +7,7 @@ export const currentMovies = async () => {
   return data.results;
 }
 
-export const loginVerification = async (info) => {
+export const loginVerification = async (info) => { 
   const options = {
     method: 'POST',
     body: JSON.stringify(info),
@@ -36,3 +36,27 @@ export const signUpVerification = async (info) => {
   console.log('fetch data-->', data)
   return data
 }
+
+export const addFavourite = async ( movie, id ) => {
+  const options = {
+    method: 'POST',
+    body: JSON.stringify(movie),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  const resp =  await fetch(`http://localhost:3001/api/v1/users/${id}/moviefavorites`, options);
+  const data = await resp.json();
+  console.log('fetch favourites--->', data);
+  return data
+}
+
+export const getFavourites = async ( id ) => {
+
+  const resp =  await fetch(`http://localhost:3001/api/v1/users/${id}/moviefavorites`);
+  const data = await resp.json();
+  console.log('fetch favourites--->', data);
+  return data
+}
+

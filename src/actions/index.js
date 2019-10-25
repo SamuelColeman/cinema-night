@@ -13,13 +13,13 @@ export const hasError = (errorMsg) => ({
   errorMsg
 })
 
-export const login = ({ name, id, isSignedIn, hasFavourites }) => {
+export const login = ({ name, id, isSignedIn, favorites}) => {
   return ({
     type: 'LOGIN_USER',
     name,
     id,
     isSignedIn,
-    hasFavourites
+    favorites
   })
 }
 
@@ -38,3 +38,10 @@ export const isFavourite = (bool) => {
     bool
   })
 }
+
+// export const favouritesList = (array) => {
+//   return ({
+//     type: 'FAVOURITES_LIST',
+//     array
+//   })
+// }
