@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import { getEmail, getPassword } from '../../actions';
 import { login, signUp } from '../../actions'
-// import { Redirect } from 'react-router-dom';
+import MoviesContainer from '../MoviesContainer/MoviesContainer'
+import { Route, Link } from 'react-router-dom';
 import { loginVerification, signUpVerification } from '../../apiCalls'
 
 class Form extends Component{
@@ -82,6 +83,9 @@ class Form extends Component{
                    onChange={this.handleChange} />
             <button onClick={this.verifySignUp}>Sign Up</button>
             <button onClick={this.verifySignIn}>Sign In</button>
+            <Link to='/' >
+              <button type='button'>Back To Movies</button> 
+            </Link>
         </form>
       )
    }
