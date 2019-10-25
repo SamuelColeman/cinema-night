@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const MoviesContainer = ({ currentUser, movies, signOutUser, toggleFavourites }) => {
+  console.log(currentUser, movies)
   let button;
   if (currentUser.name === undefined) {
     button = (

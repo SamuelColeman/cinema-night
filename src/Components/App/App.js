@@ -30,12 +30,17 @@ class App extends Component {
     console.log(currentUser)
   }
 
-  toggleFavourites = () => {
+  toggleFavourites = (id) => {
+    let { movies, currentUser, favourite } = this.props;
+    let movie =  movies.find(movie => movie.id === id);
+    if (favourite === true) {
+      currentUser.hasFavourites.push(movie)
+    }
     // e.stopPropagation()
-    let { favourite } = this.props;
     // console.log(favourite = !favourite);
+    favourite = !favourite
     console.log(favourite)
-    // favourite = !favourite
+    console.log(currentUser)
     return favourite;
   }
 

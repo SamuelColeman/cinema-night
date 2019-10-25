@@ -8,8 +8,8 @@ const MovieCard = ({ title, poster_path, overview, id, toggleFavourites }) => {
         <section className='movie_card' onClick={() => document.getElementById(id).toggleAttribute('hidden')}>
             <h1>{ title }</h1>
             <img src={poster_path} alt={title} />
-            <button  onClick={toggleFavourites}>Favorite</button>
-            <p id={id} hidden>{ overview }</p>
+            <button onClick={() => toggleFavourites(id)}>Favorite</button>
+            <p id={id} hidden>{overview}</p>
         </section>
     )
 

@@ -5,7 +5,7 @@ export const currentUser = (state={}, action) => {
         name: action.name,
         id: action.id,
         isSignedIn: action.isSignedIn,
-        hasFavourites: [...action.hasFavourites]
+        hasFavourites: []
       };
       default:
         return state;
