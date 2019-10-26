@@ -4,10 +4,8 @@ import { connect } from 'react-redux';
 // import { addFavourite } from '../../apiCalls';
 
 const MovieCard = ({ title, poster_path, overview, id ,movies, currentUser, favouritesList, removeFavourite, handleFavourite, hasError }) => {
-    console.log('Error', hasError)
     let currentMovie =  movies.find(movie => movie.id === id);
-     // console.log(currentMovie);
-     let postedMovie = { 
+    let postedMovie = { 
         movie_id: currentMovie.id,
         title: currentMovie.title,
         poster_path: currentMovie.poster_path,
@@ -16,14 +14,13 @@ const MovieCard = ({ title, poster_path, overview, id ,movies, currentUser, favo
         overview: currentMovie.overview
      }
         return (
-            <section className='movie_card' onClick={() => document.getElementById(id).toggleAttribute('hidden')}>
+            <section className='movie_card'>
                 <h1>{ title }</h1>
                 <img className="movie__card--img" src={poster_path} alt={title} />
                 <button onClick={() => handleFavourite( postedMovie )}>Favorite</button>
                 <h1>{ hasError }</h1>
                 {/* addFavourite( postedMovie, currentUser.id ) */}
                 {/* removeFavourite(id) */}
-                <p id={id} hidden>{overview}</p>
             </section>
         )
 

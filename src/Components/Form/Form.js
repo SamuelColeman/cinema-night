@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { getEmail, getPassword } from '../../actions';
 import { login, signUp, favouritesList, hasError } from '../../actions'
 import MoviesContainer from '../MoviesContainer/MoviesContainer'
 import { Route, Link } from 'react-router-dom';
@@ -20,13 +19,11 @@ class Form extends Component{
   handleChange = (e) => {
     e.preventDefault()
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state)
   }
 
   verifySignIn = async e => {
     const { hasError } = this.props;
     e.preventDefault()
-    console.log('state', this.state)
     const resp = await loginVerification({
       email: this.state.email,
       password: this.state.password
@@ -51,16 +48,13 @@ class Form extends Component{
       const resp = await getFavourites(id);
       if(resp.favorites) {
         this.props.favouritesList({favorites: resp.favorites })
-        console.log(' INSIDEEE ', this.props.favouritesList);
       }
-
       if(resp.error !== undefined) {
         this.setState({error: 'Failed to fetch favourites.'})
       } else {
       this.setState({error: ''})
     }
-
-      console.log(resp);
+    console.log(resp.favorites)
   }
 
   verifySignUp = async e => {

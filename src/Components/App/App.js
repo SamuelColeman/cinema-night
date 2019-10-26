@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { currentMovies, deleteFavorite, addFavourite } from '../../apiCalls';
+import { currentMovies, deleteFavorite, addFavourite, getFavourites } from '../../apiCalls';
 import { getMovies, isLoading, hasError } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import FavouritesContainer from '../FavouritesContainer/FavouritesContainer';
 import Form from '../Form/Form';
 import { Route, NavLink, Link } from 'react-router-dom';
 import './App.css'
-
-import './App.css';
 
 class App extends Component {
 
@@ -34,31 +33,57 @@ class App extends Component {
 
   handleFavourite = (movie) => {
     let { currentUser, errorMsg, hasError } = this.props;
+    console.log(currentUser.favorites)
     if (currentUser.isSignedIn === true) {
-      addFavourite(movie, currentUser.id);
+      this.toggleFavourites(movie)
       hasError('');
     } else {
       hasError('Must be signed in to favourite!');
     }
   }
 
-  removeFavourite = async (id) => {
-    console.log('innit remove', id)
-    const { favouritesList } = this.props; 
-    console.log('THIS IS IN REMOVE', favouritesList.favorites);
-    let currentMovie = favouritesList.favorites.find(movie => movie.movie_id === id);
-     console.log(currentMovie);
-    //  let resp = await deleteFavorite(currentMovie.user_id, currentMovie.movie_id);
+  toggleFavourites = (movie) => {
+    console.log('movie', movie)
+    let { currentUser, favouritesList } = this.props;
+    console.log('og favouritesList', favouritesList)
+    let currentMovie = favouritesList.favorites.find(film => film.movie_id === movie.movie_id);
+    console.log(currentMovie)
+    if (currentMovie === undefined) { 
+      console.log('inside') 
+      addFavourite(movie, currentUser.id);
+      this.displayFavourites(currentUser.id);
+    } else {
+      console.log('else')
+      this.removeFavourite(currentMovie);
+      this.displayFavourites(currentUser.id);
+      console.log('removeFav', favouritesList)
+    }
+  }
 
+  removeFavourite = async (movie) => {
+    const { favouritesList, currentUser } = this.props; 
+    console.log('before', favouritesList)
+    // let currentMovie = favouritesList.favorites.find(movie => movie.movie_id === id);
      try {
-      isLoading(true);
-      const deletedmovies = await deleteFavorite(currentMovie.user_id, currentMovie.movie_id);
-      isLoading(false)
-      console.log(deletedmovies)
-      // getMovies(movies);
+      const deletedmovies = await deleteFavorite(movie.user_id, movie.movie_id);
+      this.displayFavourites(currentUser.id)
     } catch (error) {
       hasError(error.message)
     }
+  }
+
+  displayFavourites = async (id) => {
+      let { favouritesList } = this.props;
+      const resp = await getFavourites(id);
+      if(resp.favorites) {
+        favouritesList.favorites = resp.favorites;
+      }
+    //   if(resp.error !== undefined) {
+    //     this.setState({error: 'Failed to fetch favourites.'})
+    //   } else {
+    //   this.setState({error: ''})
+    // }
+    console.log('after get', favouritesList.favorites)
   }
 
 
@@ -67,13 +92,13 @@ class App extends Component {
       <section className='app'>
         <Route exact path='/login' render={() => <Form /> } />
         <Route exact path='/' render={() => <MoviesContainer className='movie_container' signOutUser={this.signOutUser} removeFavourite={this.removeFavourite} handleFavourite={this.handleFavourite}/> } />
+        <Route exact path='/favorites' render={() => <FavouritesContainer handleFavourite={this.handleFavourite}/>} />
       </section>
     )
   }
 }
 
 export const mapStateToProps = (state) => ({
-  // ({ movies, error, currentUser, favourite })
   movies: state.movies,
   error: state.error,
   currentUser: state.currentUser,
@@ -85,7 +110,7 @@ export const mapDispatchToProps = (dispatch) => (
   bindActionCreators({
     getMovies,
     isLoading,
-    hasError,
+    hasError
   }, dispatch)
 )
 
