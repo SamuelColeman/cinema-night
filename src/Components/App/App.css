@@ -1,9 +1,8 @@
-.App {
+.app {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
+  background: url('../../images/stars.gif');
+  background-position: center top
+  /* background-color: #494949; */
 }
 
 .App-header {
