@@ -18,7 +18,7 @@ const MovieCard = ({ title, poster_path, overview, id ,movies, currentUser, favo
         return (
             <section className='movie_card' onClick={() => document.getElementById(id).toggleAttribute('hidden')}>
                 <h1>{ title }</h1>
-                <img src={poster_path} alt={title} />
+                <img className="movie__card--img" src={poster_path} alt={title} />
                 <button onClick={() => removeFavourite(id)}>Favorite</button>
                 {/* addFavourite( postedMovie, currentUser.id ) */}
                 {/* removeFavourite(id) */}

@@ -1,4 +1,79 @@
+/* font-family: 'Staatliches', cursive;
+font-family: 'Fjalla One', sans-serif;
+font-family: 'Anton', sans-serif; */
+
 .movies_container {
-	display: flex;
-  flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  overflow: scroll;
+  justify-content: center;
 }
+
+.div__movie--header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-around; 
+  align-items: center;
+}
+
+.img--login {
+  max-width: 17%;
+  max-height: 13vh;
+}
+
+.img--logo {
+  max-width: 17%;
+}
+
+.title-link,
+.title {
+  font-family: 'Anton', sans-serif;
+  margin: 4%;
+  letter-spacing: 5px;
+  margin: 2%;
+}
+
+/* .h4--login {
+  margin: 2%;
+} */
+
+.title {
+  font-size: 1.5em;
+}
+
+.title-link {
+  font-size: 1.5em;
+  text-decoration: none;
+  color: black;
+  
+}
+
+.h1-cinema-night {
+  font-family: 'Limelight', cursive;
+  margin-bottom: 0;
+  font-size: 4em;
+  margin-top: 2%;
+}
+
+/* header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+} */
+
+.div__movie--title {
+  background-image: url(/static/media/board.2890075f.png);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-size: cover;
+  width: 32%;
+}
+
+.h4--login {
+  margin: 0;
+}
+
