@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import { getEmail, getPassword } from '../../actions';
-import { login, signUp, favouritesList } from '../../actions'
+import { login, signUp, favouritesList, hasError } from '../../actions'
 import MoviesContainer from '../MoviesContainer/MoviesContainer'
 import { Route, Link } from 'react-router-dom';
 import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls'
@@ -24,6 +24,7 @@ class Form extends Component{
   }
 
   verifySignIn = async e => {
+    const { hasError } = this.props;
     e.preventDefault()
     console.log('state', this.state)
     const resp = await loginVerification({
@@ -37,6 +38,7 @@ class Form extends Component{
         isSignedIn: true
       })
       this.showFavourites(resp.id)
+      hasError('');
     }
       if(resp.error !== undefined) {
         this.setState({error: 'Email and password do not match.'})
@@ -117,7 +119,8 @@ export const mapDispatchToProps = (dispatch) => (
     bindActionCreators({
     login: info => dispatch(login(info)),
     signUp: info  => dispatch(signUp(info)),
-    favouritesList: info => dispatch(favouritesList(info))
+    favouritesList: info => dispatch(favouritesList(info)),
+    hasError: info => dispatch(hasError(info))
     }, dispatch)
 )
 
