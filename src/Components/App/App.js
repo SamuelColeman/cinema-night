@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { currentMovies, deleteFavorite } from '../../apiCalls';
+import { currentMovies, deleteFavorite, addFavourite } from '../../apiCalls';
 import { getMovies, isLoading, hasError } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -30,6 +30,16 @@ class App extends Component {
     console.log(currentUser)
   }
 
+  handleFavourite = (movie) => {
+    let { currentUser, errorMsg, hasError } = this.props;
+    if (currentUser.isSignedIn === true) {
+      addFavourite(movie, currentUser.id);
+      hasError('');
+    } else {
+      hasError('Must be signed in to favourite!');
+    }
+  }
+
   removeFavourite = async (id) => {
     console.log('innit remove', id)
     const { favouritesList } = this.props; 
@@ -54,7 +64,7 @@ class App extends Component {
     return (
       <section className='app'>
         <Route exact path='/login' render={() => <Form /> } />
-        <Route exact path='/' render={() => <MoviesContainer className='movie_container' signOutUser={this.signOutUser} removeFavourite={this.removeFavourite}/> } />
+        <Route exact path='/' render={() => <MoviesContainer className='movie_container' signOutUser={this.signOutUser} removeFavourite={this.removeFavourite} handleFavourite={this.handleFavourite}/> } />
       </section>
     )
   }
