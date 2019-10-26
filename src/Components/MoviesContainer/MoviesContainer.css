@@ -16,7 +16,7 @@ font-family: 'Anton', sans-serif; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  overflow: scroll;
+  /* overflow: scroll; */
   height: 100vh;
 }
 
