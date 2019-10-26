@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 const MoviesContainer = ({ currentUser, movies, signOutUser, removeFavourite }) => {
   console.log(currentUser, movies)
   let button;
-  if (currentUser.name === undefined) {
+  if (currentUser.name === undefined || currentUser.id === null) {
     button = (
       <Link to='/login'>
         <button>Sign In</button>
