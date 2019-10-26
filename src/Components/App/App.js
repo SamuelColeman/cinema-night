@@ -36,23 +36,17 @@ class App extends Component {
     console.log('THIS IS IN REMOVE', favouritesList.favorites);
     let currentMovie = favouritesList.favorites.find(movie => movie.movie_id === id);
      console.log(currentMovie);
-     let resp = await deleteFavorite(currentMovie.user_id, currentMovie.movie_id);
+    //  let resp = await deleteFavorite(currentMovie.user_id, currentMovie.movie_id);
 
-     if(resp.id) {
-      // this.props.favouritesList({favorites: resp.favorites })
-      console.log(' INSIDEEE OF REMOVE ');
-
+     try {
+      isLoading(true);
+      const deletedmovies = await deleteFavorite(currentMovie.user_id, currentMovie.movie_id);
+      isLoading(false)
+      console.log(deletedmovies)
+      // getMovies(movies);
+    } catch (error) {
+      hasError(error.message)
     }
-
-    if(resp.error !== undefined) {
-      // this.setState({error: 'Failed to fetch favourites.'})
-      console.log('BOB IS IN TROUBLE')
-    } else {
-    // this.setState({error: ''})
-       console.log('IS LIT UP IN HERE')
-  }
-
-    console.log(resp);
   }
 
 

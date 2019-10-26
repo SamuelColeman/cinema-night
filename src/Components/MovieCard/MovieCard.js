@@ -21,6 +21,7 @@ const MovieCard = ({ title, poster_path, overview, id ,movies, currentUser, favo
                 <img src={poster_path} alt={title} />
                 <button onClick={() => removeFavourite(id)}>Favorite</button>
                 {/* addFavourite( postedMovie, currentUser.id ) */}
+                {/* removeFavourite(id) */}
                 <p id={id} hidden>{overview}</p>
             </section>
         )
