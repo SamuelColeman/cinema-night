@@ -74,7 +74,7 @@ header {
 }
 
 .div__movie--title {
-  background-image: url(/static/media/board.2890075f.png);
+  background-image: url('../../images/board.png');
   display: flex;
   flex-direction: column;
   justify-content: center;

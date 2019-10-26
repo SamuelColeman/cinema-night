@@ -1,6 +1,4 @@
 export const users = (state = {}, action) => {
-  console.log('users state -->', state)
-  console.log('users actions--->', action)
   switch(action.type) {
     case 'SIGN_UP_USER':
       return {
@@ -11,5 +9,4 @@ export const users = (state = {}, action) => {
     default:
       return state;
   }
-  console.log('users state -->', state)
 }
