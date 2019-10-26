@@ -1,7 +1,9 @@
 .movie_card {
 	border: 1px solid black;
-	width: 50%;
+	width: 31%;
 	text-align: center;
+	background-color: #E1E1E1;
+	margin-top: 1%;
 }
 
 h1 {
@@ -9,8 +11,8 @@ h1 {
   font-size: 30px;
 }
 
-img {
-	width: 50%;
+.movie__card--img {
+	width: 79%;
 }
 
 button {
