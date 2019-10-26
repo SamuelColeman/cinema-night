@@ -18,7 +18,7 @@ const MovieCard = ({ title, poster_path, overview, id ,movies, currentUser, favo
         return (
             <section className='movie_card' onClick={() => document.getElementById(id).toggleAttribute('hidden')}>
                 <h1>{ title }</h1>
-                <img src={poster_path} alt={title} />
+                <img className="movie__card--img" src={poster_path} alt={title} />
                 <button onClick={() => handleFavourite( postedMovie )}>Favorite</button>
                 <h1>{ hasError }</h1>
                 {/* addFavourite( postedMovie, currentUser.id ) */}

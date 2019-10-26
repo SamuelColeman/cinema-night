@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import Form from '../Form/Form';
 import { Route, NavLink, Link } from 'react-router-dom';
+import './App.css'
+
 import './App.css';
 
 class App extends Component {
