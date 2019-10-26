@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import { getEmail, getPassword } from '../../actions';
-import { login, signUp } from '../../actions'
+import { login, signUp, favouritesList } from '../../actions'
 import MoviesContainer from '../MoviesContainer/MoviesContainer'
 import { Route, Link } from 'react-router-dom';
 import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls'
@@ -46,8 +46,18 @@ class Form extends Component{
   }
 
   showFavourites = async (id) => {
-      
       const resp = await getFavourites(id);
+      if(resp.favorites) {
+        this.props.favouritesList({favorites: resp.favorites })
+        console.log(' INSIDEEE ', this.props.favouritesList);
+
+      }
+
+      if(resp.error !== undefined) {
+        this.setState({error: 'Failed to fetch favourites.'})
+      } else {
+      this.setState({error: ''})
+    }
 
       console.log(resp);
   }
@@ -107,7 +117,8 @@ export const mapStateToProps = ({ currentUser, users }) => ({
 export const mapDispatchToProps = (dispatch) => (
     bindActionCreators({
     login: info => dispatch(login(info)),
-    signUp: info  => dispatch(signUp(info))
+    signUp: info  => dispatch(signUp(info)),
+    favouritesList: info => dispatch(favouritesList(info))
     }, dispatch)
 )
 

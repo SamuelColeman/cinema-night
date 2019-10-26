@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { currentMovies } from '../../apiCalls';
-import { getMovies, isLoading, hasError, isFavourite } from '../../actions';
+import { currentMovies, deleteFavorite } from '../../apiCalls';
+import { getMovies, isLoading, hasError } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
@@ -30,6 +30,13 @@ class App extends Component {
     console.log(currentUser)
   }
 
+  deleteFavourite = (id) => {
+    const { favouritesList } = this.props; 
+    let currentMovie =  favouritesList.find(movie => movie.movie_id === id);
+
+     deleteFavorite(currentMovie.id)
+  }
+
 
   render() {
     return (
@@ -46,7 +53,8 @@ export const mapStateToProps = (state) => ({
   movies: state.movies,
   error: state.error,
   currentUser: state.currentUser,
-  favourite: state.favourite
+  favouritesList: state.favouritesList
+
 });
 
 export const mapDispatchToProps = (dispatch) => (
@@ -54,7 +62,6 @@ export const mapDispatchToProps = (dispatch) => (
     getMovies,
     isLoading,
     hasError,
-    isFavourite
   }, dispatch)
 )
 

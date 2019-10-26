@@ -3,8 +3,8 @@ import './MovieCard.css';
 import { connect } from 'react-redux';
 import { addFavourite } from '../../apiCalls';
 
-const MovieCard = ({ title, poster_path, overview, id ,movies, currentUser}) => {
-  
+const MovieCard = ({ title, poster_path, overview, id ,movies, currentUser, favouritesList}) => {
+    console.log('FAV', favouritesList)
     let currentMovie =  movies.find(movie => movie.id === id);
      let postedMovie = { 
         movie_id: currentMovie.id,
@@ -27,7 +27,7 @@ const MovieCard = ({ title, poster_path, overview, id ,movies, currentUser}) => 
 
 export const mapStateToProps = (state) => ({
     currentUser: state.currentUser,
-    favourite: state.favourite,
+    favouritesList: state.favouritesList,
     movies: state.movies,
 })
 
