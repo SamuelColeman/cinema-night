@@ -3,9 +3,10 @@ import './MovieCard.css';
 import { connect } from 'react-redux';
 import { addFavourite } from '../../apiCalls';
 
-const MovieCard = ({ title, poster_path, overview, id ,movies, currentUser, favouritesList}) => {
-    console.log('FAV', favouritesList)
+const MovieCard = ({ title, poster_path, overview, id ,movies, currentUser, favouritesList, removeFavourite}) => {
+    // console.log('FAV', id)
     let currentMovie =  movies.find(movie => movie.id === id);
+     console.log(currentMovie);
      let postedMovie = { 
         movie_id: currentMovie.id,
         title: currentMovie.title,
@@ -18,7 +19,8 @@ const MovieCard = ({ title, poster_path, overview, id ,movies, currentUser, favo
             <section className='movie_card' onClick={() => document.getElementById(id).toggleAttribute('hidden')}>
                 <h1>{ title }</h1>
                 <img src={poster_path} alt={title} />
-                <button onClick={() => addFavourite( postedMovie, currentUser.id )}>Favorite</button>
+                <button onClick={() => removeFavourite(id)}>Favorite</button>
+                {/* addFavourite( postedMovie, currentUser.id ) */}
                 <p id={id} hidden>{overview}</p>
             </section>
         )

@@ -50,7 +50,6 @@ class Form extends Component{
       if(resp.favorites) {
         this.props.favouritesList({favorites: resp.favorites })
         console.log(' INSIDEEE ', this.props.favouritesList);
-
       }
 
       if(resp.error !== undefined) {

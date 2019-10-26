@@ -60,13 +60,15 @@ export const getFavourites = async ( id ) => {
   return data
 }
 
-export const deleteFavorite = async ( userId, favoriteId ) => {
+export const deleteFavorite = async ( userId, movieId ) => {
   const options = {
     method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
   }
 
-  const resp =  await fetch(`http://localhost:3001api/v1/users/${userId}/moviefavorites/${favoriteId}`, options);
+  const resp =  await fetch(`http://localhost:3001/api/v1/users/${userId}/moviefavorites/${movieId}`, options);
   const data = await resp.json();
-  console.log('fetch favourites--->', data);
   return data
 }
