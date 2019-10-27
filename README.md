@@ -27,4 +27,4 @@ Cinema Night was built using:
   
 ## Picture of Cinema Night
 
-![image of Cinema Night app](https://github.com/Asilo5/whats-new/blob/master/Screenshot%202019-10-06%20at%2023.14.25.png)
+![image of Cinema Night app]()
