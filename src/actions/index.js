@@ -37,3 +37,10 @@ export const favouritesList = ({ favorites }) => {
     favorites
   })
 }
+
+export const selectedMovie = (id) => {
+  return ({
+    type: 'SELECTED_MOVIE',
+    id
+  })
+}
