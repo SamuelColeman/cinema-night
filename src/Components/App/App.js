@@ -131,5 +131,9 @@ App.propTypes = {
 }
 
 App.defaultProps = {
-  isLoading: true
+  isLoading: true,
+  movies: [],
+  currentUser: {},
+  favorites: [],
+  selectedMovie: {}
 }
