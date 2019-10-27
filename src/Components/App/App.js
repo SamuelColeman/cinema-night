@@ -4,7 +4,7 @@ import { getMovies, isLoading, hasError } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
-import MovieCard from '../MovieCard/MovieCard';
+import MoviePage from '../MoviePage/MoviePage';
 import FavouritesContainer from '../FavouritesContainer/FavouritesContainer';
 import Form from '../Form/Form';
 import { Route, NavLink, Link } from 'react-router-dom';
@@ -104,7 +104,7 @@ class App extends Component {
             const filteredFilm = movies.find(movie => movie.id === parseInt(id)
             );
             return (
-              <MovieCard {...filteredFilm}/>
+              <MoviePage {...filteredFilm} />
           )}} />
       </section>
     )
