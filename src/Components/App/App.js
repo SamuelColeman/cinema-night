@@ -21,6 +21,7 @@ class App extends Component {
     } catch (error) {
       hasError(error.message)
     }
+    
   }
 
   signOutUser = () => {
@@ -65,12 +66,12 @@ class App extends Component {
     }
   
 
-  removeFavourite = async (movie) => {
-    const { favouritesList, currentUser } = this.props; 
+  removeFavourite = async (id, movieId) => {
+    const { favouritesList } = this.props; 
     console.log('before', favouritesList)
      try {
-      const deletedmovies = await deleteFavorite(movie.user_id, movie.movie_id);
-      this.displayFavourites(currentUser.id)
+      await deleteFavorite(id, movieId);
+      this.displayFavourites(id)
     } catch (error) {
       hasError(error.message)
     }
@@ -81,7 +82,7 @@ class App extends Component {
       const resp = await getFavourites(id);
       if(resp.favorites) {
         favouritesList.favorites = resp.favorites;
-      }
+      // }
     console.log('after get', favouritesList.favorites)
   }
 
