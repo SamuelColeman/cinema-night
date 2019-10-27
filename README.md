@@ -11,6 +11,8 @@ Cinema Night is an app users can use to browse the top 20 newly released films o
 
 Clone the repo to your terminal :``` $ git clone https://github.com/SamuelColeman/cinema-night.git```
 
+Once cloned down add ``` cd cinema-night ``` to your terminal
+
 Run ``` $ npm install ``` in your terminal
 
 To open the app on your web server run ``` $ npm start ```
