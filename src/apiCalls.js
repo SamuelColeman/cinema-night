@@ -52,7 +52,6 @@ export const addFavourite = async ( movie, id ) => {
 }
 
 export const getFavourites = async ( id ) => {
-
   const resp =  await fetch(`http://localhost:3001/api/v1/users/${id}/moviefavorites`);
   const data = await resp.json();
   return data

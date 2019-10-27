@@ -118,7 +118,8 @@ import { signUp } from './actions';
     });
 
     describe('addFavourite', () => {
-        let  mockAddFavourite = mockCurrentMovie;
+        let mockAddFavourite = mockCurrentMovie;
+        let mockId = 475557;
 
         beforeEach(() => {
             window.fetch = jest.fn().mockImplementation(() => {
@@ -129,11 +130,39 @@ import { signUp } from './actions';
             })
           })
 
-        
+        it('should fetch correct arguments', () => {
+          const expected = [`http://localhost:3001/api/v1/users/${mockId}/moviefavorites`, {
+            method: 'POST',
+            body: JSON.stringify(mockAddFavourite),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }];
+
+          addFavourite(mockAddFavourite, mockId);
+
+          expect(window.fetch).toHaveBeenCalledWith(...expected);
+        })
     });
 
     describe('getFavourites', () => {
-        let mockGetFavourites = [mockCurrentMovie];
+        let mockId = 475557;
+
+        beforeEach(() => {
+            window.fetch = jest.fn().mockImplementation(() => {
+                return Promise.resolve({
+                    ok: true,
+                    json: () => Promise.resolve(mockCurrentMovie)
+                })
+            })
+          });
+
+        it('should fetch with the correct URL ', () => {
+            getFavourites(mockId);
+            expect(window.fetch).toHaveBeenCalledWith(`http://localhost:3001/api/v1/users/${mockId}/moviefavorites`)
+        })
+
+        it()
     });
 
     describe('deleteFavorite', () => {
