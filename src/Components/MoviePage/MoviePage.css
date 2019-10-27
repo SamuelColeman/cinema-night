@@ -10,7 +10,8 @@
 h2,
 h3 {
 	color: white;
-  padding: 1% 25%;
+  padding: 3% 25%;
+  margin: 0px;
 }
 
 .movie__page--title {

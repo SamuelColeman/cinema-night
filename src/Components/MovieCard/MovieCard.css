@@ -21,4 +21,10 @@ button {
   background: transparent;
   color: white;
   font-size: 15px;
+  margin: 4%;
+}
+
+button:hover {
+	background: white;
+	color: black;
 }
