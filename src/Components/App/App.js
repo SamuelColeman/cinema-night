@@ -31,34 +31,39 @@ class App extends Component {
     console.log(currentUser)
   }
 
-  handleFavourite = (movie) => {
+  handleFavourite = (e, movie) => {
+    console.log('MOVIE-->', movie)
     let { currentUser, errorMsg, hasError } = this.props;
     console.log(currentUser.favorites)
     if (currentUser.isSignedIn === true) {
-      this.toggleFavourites(movie)
+      this.toggleFavourites(e, movie)
       hasError('');
     } else {
       hasError('Must be signed in to favourite!');
     }
   }
 
-  toggleFavourites = (movie) => {
-    console.log('movie', movie)
-    let { currentUser, favouritesList } = this.props;
-    console.log('og favouritesList', favouritesList)
-    let currentMovie = favouritesList.favorites.find(film => film.movie_id === movie.id);
-    console.log(currentMovie)
-    if (currentMovie === undefined) { 
-      console.log('inside') 
-      addFavourite(movie, currentUser.id);
-      this.displayFavourites(currentUser.id);
+  toggleFavourites = (e, movie) => {
+    // e.preventDefault()
+    let id = this.props.currentUser.id
+    console.log(id, movie)
+    if(this.props.favouritesList.favorites.map(favorite => favorite.title).includes(movie.title)) {
+      this.removeFavourite(id, movie.movie_id)
     } else {
-      console.log('else')
-      this.removeFavourite(currentMovie);
-      this.displayFavourites(currentUser.id);
-      console.log('removeFav', favouritesList)
+      this.postFavourite(id, movie)
     }
-  }
+    }
+
+    postFavourite = async (id, movie) => {
+      try {
+        await addFavourite(movie, id)
+        let currentFavorites = await getFavourites(id)
+        this.props.favouritesList(currentFavorites)
+      } catch({errorMsg}) {
+        console.log(errorMsg)
+      }
+    }
+  
 
   removeFavourite = async (movie) => {
     const { favouritesList, currentUser } = this.props; 
@@ -80,16 +85,16 @@ class App extends Component {
     console.log('after get', favouritesList.favorites)
   }
 
-  selectMovie = e => {
-    let { movies, favouritesList } = this.props;
-    let movieTarget = parseInt(e.target.closest('section').id);
-    console.log(movies, movieTarget)
-    console.log(favouritesList)
-    let foundMovie = movies.find(film => film.id === movieTarget)
-    console.log('foundMovie', foundMovie)
-    this.handleFavourite(foundMovie);
-    // selectedMovie(movieTarget);
-  }
+  // selectMovie = e => {
+  //   let { movies, favouritesList } = this.props;
+  //   let movieTarget = parseInt(e.target.closest('section').id);
+  //   console.log(movies, movieTarget)
+  //   console.log(favouritesList)
+  //   let foundMovie = movies.find(film => film.id === movieTarget)
+  //   console.log('foundMovie', foundMovie)
+  //   this.handleFavourite(foundMovie);
+  //   // selectedMovie(movieTarget);
+  // }
 
   render() {
     return (
