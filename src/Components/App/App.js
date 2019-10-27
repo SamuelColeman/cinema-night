@@ -7,7 +7,8 @@ import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import FavouritesContainer from '../FavouritesContainer/FavouritesContainer';
 import Form from '../Form/Form';
 import { Route, NavLink, Link } from 'react-router-dom';
-import './App.css'
+import './App.css';
+import PropTypes from 'prop-types'
 
 class App extends Component {
 
@@ -22,15 +23,13 @@ class App extends Component {
       hasError(error.message)
     }
     if(currentUser.name) {
-      console.log(currentUser.name)
       try {
         let userFavorites = await getFavourites(currentUser.id)
-        console.log(' favorites in new mount', userFavorites)
         this.displayFavourites(userFavorites)
       } catch(error) {
-        console.log(error)
       }
     }
+    console.log(this.props)
   }
 
   signOutUser = () => {
@@ -38,12 +37,11 @@ class App extends Component {
     currentUser.name = '';
     currentUser.id = null;
     currentUser.isSignedIn=false;
-    console.log(currentUser)
   }
 
   handleFavourite = (e, movie) => {
     console.log('MOVIE-->', movie)
-    let { currentUser, errorMsg, hasError } = this.props;
+    let { currentUser, hasError } = this.props;
     console.log(currentUser.favorites)
     if (currentUser.isSignedIn === true) {
       this.toggleFavourites(e, movie)
@@ -56,7 +54,6 @@ class App extends Component {
   toggleFavourites = (e, movie) => {
     e.preventDefault()
     let id = this.props.currentUser.id
-    console.log('in toggle --->', id, movie, movie.movie_id)
     if(this.props.favouritesList.favorites.map(favorite => favorite.title).includes(movie.title)) {
       this.removeFavourite(id, movie.id)
     } else {
@@ -65,21 +62,15 @@ class App extends Component {
     }
 
     postFavourite = async (id, movie) => {
-      console.log('in post favorites--->', id, movie)
       try {
         await addFavourite(id, movie)
         let currentFavorites = await getFavourites(id)
         this.props.favouritesList(currentFavorites)
-        console.log('FAV LIST-->', this.props.favouritesList)
       } catch({errorMsg}) {
-        console.log(errorMsg)
       }
     }
   
   removeFavourite = async (id, movieId) => {
-    console.log('in remove favorites--->', id, movieId)
-    const { favouritesList } = this.props; 
-    console.log('before', favouritesList)
      try {
       await deleteFavorite(id, movieId);
       this.displayFavourites(id)
@@ -93,9 +84,7 @@ class App extends Component {
       const resp = await getFavourites(id);
       if(resp.favorites) {
         favouritesList.favorites = resp.favorites;
-      // }
-    console.log('after get', favouritesList.favorites)
-  }
+      }
   }
 
   render() {
@@ -126,3 +115,17 @@ export const mapDispatchToProps = (dispatch) => (
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+App.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentUser: PropTypes.object.shape({
+    name: PropTypes.string,
+    id: PropTypes.number,
+    isSignedIn: PropTypes.bool
+  }),
+  favorites: PropTypes.array,
+  getMovies: PropTypes.func,
+  hasError: PropTypes.func,
+  isLoading: PropTypes.func,
+  selectedMovie: PropTypes.object
+}
