@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import { login, signUp, favouritesList, hasError } from '../../actions'
 import MoviesContainer from '../MoviesContainer/MoviesContainer'
 import { Route, Link } from 'react-router-dom';
-import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls'
+import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls';
+import PropTypes from 'prop-types'
 
 class Form extends Component{
   constructor() {
@@ -13,7 +14,7 @@ class Form extends Component{
       email: '',
       password: '',
       error: ''
-    }
+    } 
   }
 
   handleChange = (e) => {
@@ -22,6 +23,7 @@ class Form extends Component{
   }
 
   verifySignIn = async e => {
+    console.log(this.props, this.state)
     const { hasError } = this.props;
     e.preventDefault()
     const resp = await loginVerification({
@@ -119,3 +121,14 @@ export const mapDispatchToProps = (dispatch) => (
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
+
+Form.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+  favouritesList: PropTypes.func,
+  hasError: PropTypes.func,
+  login: PropTypes.func,
+  signUp: PropTypes.func,
+  users: PropTypes.object,
+  email: PropTypes.string,
+  password: PropTypes.string,
+}
