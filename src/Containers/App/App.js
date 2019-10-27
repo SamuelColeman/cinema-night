@@ -3,7 +3,7 @@ import { currentMovies, deleteFavorite, addFavourite, getFavourites } from '../.
 import { getMovies, isLoading, hasError } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import MoviesContainer from '../../Components/MoviesContainer/MoviesContainer';
 import FavouritesContainer from '../FavouritesContainer/FavouritesContainer';
 import Form from '../Form/Form';
 import { Route, NavLink, Link } from 'react-router-dom';
