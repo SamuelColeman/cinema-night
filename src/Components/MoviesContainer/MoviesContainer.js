@@ -3,8 +3,10 @@ import MovieCard from '../MovieCard/MovieCard';
 import './MoviesContainer.css';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
 
 const MoviesContainer = ({ currentUser, movies, signOutUser, removeFavourite, handleFavourite, selectMovie }) => {
+
   let button;
   if (currentUser.name === undefined || currentUser.id === null) {
     button = (
@@ -53,3 +55,11 @@ export const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps)(MoviesContainer);
+
+MoviesContainer.propTypes = {
+  currentUser: PropTypes.object,
+  movies: PropTypes.arrayOf(PropTypes.object),
+  signOutUser: PropTypes.func,
+  removeFavourite: PropTypes.func,
+  handleFavorite: PropTypes.func
+}

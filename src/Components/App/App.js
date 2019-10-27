@@ -118,14 +118,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 App.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
-  currentUser: PropTypes.object.shape({
+  currentUser: PropTypes.shape({
     name: PropTypes.string,
     id: PropTypes.number,
     isSignedIn: PropTypes.bool
   }),
-  favorites: PropTypes.array,
+  favorites: PropTypes.arrayOf(PropTypes.object),
   getMovies: PropTypes.func,
   hasError: PropTypes.func,
   isLoading: PropTypes.func,
   selectedMovie: PropTypes.object
+}
+
+App.defaultProps = {
+  isLoading: true
 }
