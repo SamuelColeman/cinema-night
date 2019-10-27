@@ -25,7 +25,7 @@ const MovieCard = ({ title, poster_path, overview, id, movies, currentUser, favo
                         {/* removeFavourite(id) */}
                     </div>
                 </Link>
-                <button onClick={() => addFavourite( postedMovie, currentUser.id )}>Favorite</button>
+                <button onClick={(e) => selectMovie(e)}>Favorite</button>
             </section>
         )
 
