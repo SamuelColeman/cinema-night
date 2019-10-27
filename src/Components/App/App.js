@@ -12,7 +12,7 @@ import './App.css'
 class App extends Component {
 
   async componentDidMount() {
-    const { getMovies, hasError, isLoading } = this.props;
+    const {currentUser, getMovies, hasError, isLoading } = this.props;
     try {
       isLoading(true);
       const movies = await currentMovies();
@@ -21,7 +21,16 @@ class App extends Component {
     } catch (error) {
       hasError(error.message)
     }
-    
+    if(currentUser.name) {
+      console.log(currentUser.name)
+      try {
+        let userFavorites = await getFavourites(currentUser.id)
+        console.log(' favorites in new mount', userFavorites)
+        this.displayFavourites(userFavorites)
+      } catch(error) {
+        console.log(error)
+      }
+    }
   }
 
   signOutUser = () => {
@@ -45,11 +54,11 @@ class App extends Component {
   }
 
   toggleFavourites = (e, movie) => {
-    // e.preventDefault()
+    e.preventDefault()
     let id = this.props.currentUser.id
-    console.log(id, movie)
+    console.log('in toggle --->', id, movie, movie.movie_id)
     if(this.props.favouritesList.favorites.map(favorite => favorite.title).includes(movie.title)) {
-      this.removeFavourite(id, movie.movie_id)
+      this.removeFavourite(id, movie.id)
     } else {
       this.postFavourite(id, movie)
     }
@@ -67,6 +76,7 @@ class App extends Component {
   
 
   removeFavourite = async (id, movieId) => {
+    console.log('in remove favorites--->', id, movieId)
     const { favouritesList } = this.props; 
     console.log('before', favouritesList)
      try {
@@ -95,7 +105,7 @@ class App extends Component {
   //   console.log('foundMovie', foundMovie)
   //   this.handleFavourite(foundMovie);
   //   // selectedMovie(movieTarget);
-  // }
+  }
 
   render() {
     return (
