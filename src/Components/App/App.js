@@ -65,16 +65,17 @@ class App extends Component {
     }
 
     postFavourite = async (id, movie) => {
+      console.log('in post favorites--->', id, movie)
       try {
-        await addFavourite(movie, id)
+        await addFavourite(id, movie)
         let currentFavorites = await getFavourites(id)
         this.props.favouritesList(currentFavorites)
+        console.log('FAV LIST-->', this.props.favouritesList)
       } catch({errorMsg}) {
         console.log(errorMsg)
       }
     }
   
-
   removeFavourite = async (id, movieId) => {
     console.log('in remove favorites--->', id, movieId)
     const { favouritesList } = this.props; 
@@ -95,16 +96,6 @@ class App extends Component {
       // }
     console.log('after get', favouritesList.favorites)
   }
-
-  // selectMovie = e => {
-  //   let { movies, favouritesList } = this.props;
-  //   let movieTarget = parseInt(e.target.closest('section').id);
-  //   console.log(movies, movieTarget)
-  //   console.log(favouritesList)
-  //   let foundMovie = movies.find(film => film.id === movieTarget)
-  //   console.log('foundMovie', foundMovie)
-  //   this.handleFavourite(foundMovie);
-  //   // selectedMovie(movieTarget);
   }
 
   render() {

@@ -38,7 +38,6 @@ const MoviesContainer = ({ currentUser, movies, signOutUser, removeFavourite, ha
             <h4 className="h4--view-favorites title-link">View Favorites</h4>
           </Link>
         {button}
-
         </div>
           </header>
           <div className="movies">

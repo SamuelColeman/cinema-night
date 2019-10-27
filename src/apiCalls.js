@@ -37,7 +37,8 @@ export const signUpVerification = async (info) => {
   return data
 }
 
-export const addFavourite = async ( movie, id ) => {
+export const addFavourite = async ( id, movie ) => {
+  console.log('IN POST!!!', movie, id)
   const options = {
     method: 'POST',
     body: JSON.stringify(movie),
@@ -48,7 +49,7 @@ export const addFavourite = async ( movie, id ) => {
 
   const resp =  await fetch(`http://localhost:3001/api/v1/users/${id}/moviefavorites`, options);
   const data = await resp.json();
-  return data
+  console.log(data)
 }
 
 export const getFavourites = async ( id ) => {
