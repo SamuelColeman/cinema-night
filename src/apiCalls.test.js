@@ -1,4 +1,5 @@
-import { currentMovies, addFavourite, deleteFavorite, getFavourites, loginVerification } from './apiCalls';
+import { currentMovies, addFavourite, deleteFavorite, getFavourites, loginVerification, signUpVerification } from './apiCalls';
+import { signUp } from './actions';
 
  describe('apiCalls', () => {  
 
@@ -103,12 +104,32 @@ import { currentMovies, addFavourite, deleteFavorite, getFavourites, loginVerifi
           })
 
           it('should fetch correct arguments', () => {
-              const expected = [ 'http://localhost:3001/api/v1/users', ]
+              const expected = [ 'http://localhost:3001/api/v1/users',{
+                method: 'POST',
+                body: JSON.stringify(mockVerification),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              }];
+              signUpVerification(mockVerification);
+
+              expect(window.fetch).toHaveBeenCalledWith(...expected);
           })
     });
 
     describe('addFavourite', () => {
         let  mockAddFavourite = mockCurrentMovie;
+
+        beforeEach(() => {
+            window.fetch = jest.fn().mockImplementation(() => {
+                return Promise.resolve({
+                    ok: true,
+                    json: () => Promise.resolve(mockCurrentMovie)
+                })
+            })
+          })
+
+        
     });
 
     describe('getFavourites', () => {
