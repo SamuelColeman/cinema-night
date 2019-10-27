@@ -46,7 +46,7 @@ class App extends Component {
     console.log('movie', movie)
     let { currentUser, favouritesList } = this.props;
     console.log('og favouritesList', favouritesList)
-    let currentMovie = favouritesList.favorites.find(film => film.movie_id === movie.movie_id);
+    let currentMovie = favouritesList.favorites.find(film => film.movie_id === movie.id);
     console.log(currentMovie)
     if (currentMovie === undefined) { 
       console.log('inside') 
@@ -63,7 +63,6 @@ class App extends Component {
   removeFavourite = async (movie) => {
     const { favouritesList, currentUser } = this.props; 
     console.log('before', favouritesList)
-    // let currentMovie = favouritesList.favorites.find(movie => movie.movie_id === id);
      try {
       const deletedmovies = await deleteFavorite(movie.user_id, movie.movie_id);
       this.displayFavourites(currentUser.id)
@@ -78,20 +77,25 @@ class App extends Component {
       if(resp.favorites) {
         favouritesList.favorites = resp.favorites;
       }
-    //   if(resp.error !== undefined) {
-    //     this.setState({error: 'Failed to fetch favourites.'})
-    //   } else {
-    //   this.setState({error: ''})
-    // }
     console.log('after get', favouritesList.favorites)
   }
 
+  selectMovie = e => {
+    let { movies, favouritesList } = this.props;
+    let movieTarget = parseInt(e.target.closest('section').id);
+    console.log(movies, movieTarget)
+    console.log(favouritesList)
+    let foundMovie = movies.find(film => film.id === movieTarget)
+    console.log('foundMovie', foundMovie)
+    this.handleFavourite(foundMovie);
+    // selectedMovie(movieTarget);
+  }
 
   render() {
     return (
       <section className='app'>
         <Route exact path='/login' render={() => <Form /> } />
-        <Route exact path='/' render={() => <MoviesContainer className='movie_container' signOutUser={this.signOutUser} removeFavourite={this.removeFavourite} handleFavourite={this.handleFavourite}/> } />
+        <Route exact path='/' render={() => <MoviesContainer selectMovie={this.selectMovie} className='movie_container' signOutUser={this.signOutUser} removeFavourite={this.removeFavourite} handleFavourite={this.handleFavourite}/> } />
         <Route exact path='/favorites' render={() => <FavouritesContainer handleFavourite={this.handleFavourite}/>} />
       </section>
     )
@@ -102,8 +106,8 @@ export const mapStateToProps = (state) => ({
   movies: state.movies,
   error: state.error,
   currentUser: state.currentUser,
-  favouritesList: state.favouritesList
-
+  favouritesList: state.favouritesList,
+  selectedMovie: state.selectedMovie
 });
 
 export const mapDispatchToProps = (dispatch) => (
