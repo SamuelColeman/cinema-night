@@ -16,6 +16,10 @@ describe('FormContainer',  () => {
            wrapper = shallow (<Form />)
        })
 
+       it('should match snapshot with all information passing through', () => {
+           expect(wrapper).toMatchSnapshot();
+       })
+
        it('should update local state of email when handle change is invoked', () => {
            const mockEvent = { target : {
                name: 'email',
