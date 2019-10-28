@@ -4,6 +4,7 @@ import { getMovies, isLoading, hasError } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import MoviePage from '../MoviePage/MoviePage';
 import FavouritesContainer from '../FavouritesContainer/FavouritesContainer';
 import Form from '../Form/Form';
 import { Route, NavLink, Link } from 'react-router-dom';
@@ -97,6 +98,14 @@ class App extends Component {
         <Route exact path='/login' render={() => <Form /> } />
         <Route exact path='/' render={() => <MoviesContainer selectMovie={this.selectMovie} className='movie_container' signOutUser={this.signOutUser} removeFavourite={this.removeFavourite} handleFavourite={this.handleFavourite}/> } />
         <Route exact path='/favorites' render={() => <FavouritesContainer handleFavourite={this.handleFavourite}/>} />
+        <Route exact path='/movies/:id' render={({ match }) => {
+            let { movies } = this.props;
+            const { id } = match.params;
+            const filteredFilm = movies.find(movie => movie.id === parseInt(id)
+            );
+            return (
+              <MoviePage {...filteredFilm} />
+          )}} />
       </section>
     )
   }
