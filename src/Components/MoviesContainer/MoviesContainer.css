@@ -63,6 +63,12 @@ header {
   
 }
 
+.title-link:hover {
+  color: white;
+  background-color: black;
+  font-size: 1.75em;
+}
+
 .h1-cinema-night {
   font-family: 'Limelight', cursive;
   margin-bottom: 0;
@@ -71,6 +77,7 @@ header {
   color: #6B0902;
   text-shadow: 3px 3px #B35708;
 }
+
 
 .div__movie--title {
   background-image: url('../../images/board.png');
