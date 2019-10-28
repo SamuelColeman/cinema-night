@@ -1,0 +1,1 @@
+import { MovieCard, mapStateToProps, mapDispatchToProps } from './MovieCard';

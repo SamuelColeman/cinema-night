@@ -5,17 +5,22 @@
  describe('MovieCard', () => {
 
     let wrapper;
+    let mockFunction = jest.fn();
     let chosenMovie =  {
         id: 456,
         title: 'Harry Potter and the Sorceres Stone',
         popularity: 462.91,
-        vote_count: 3775,
+        vote_count: 3775, 
         video: false,
       }
 
     beforeEach(() => {
       wrapper = shallow(<MovieCard 
-         {...chosenMovie}
+        key={chosenMovie.id}
+        removeFavourite={mockFunction}
+        handleFavourite={mockFunction}
+        selectMovie={mockFunction}
+        {...chosenMovie}
       />)
     })
 

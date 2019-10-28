@@ -29,7 +29,7 @@ const MovieCard = ({ title, poster_path, overview, id, movies, currentUser, favo
             </section>
         )
 
-}  
+}   
 
 export const mapStateToProps = (state) => ({
     currentUser: state.currentUser,
