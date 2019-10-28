@@ -23,9 +23,7 @@ const MoviesContainer = ({ currentUser, movies, signOutUser, removeFavourite, ha
   }
   const loopMovies = movies.map((movie) => {
       return <MovieCard key={movie.id}
-        removeFavourite={removeFavourite}
-        handleFavourite={handleFavourite}
-        selectMovie={selectMovie}
+              selectMovie={selectMovie}
                         {...movie} />
   })
     return (
