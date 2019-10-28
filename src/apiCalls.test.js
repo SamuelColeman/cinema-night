@@ -162,11 +162,36 @@ import { signUp } from './actions';
             expect(window.fetch).toHaveBeenCalledWith(`http://localhost:3001/api/v1/users/${mockId}/moviefavorites`)
         })
 
-        it()
+        // ask if happy and sad paths need to be tested again
+        // most likely yis
     });
 
     describe('deleteFavorite', () => {
         let mockDeleteFavorite = '204 status code, no response body content';
+        let userId = 1;
+        let mockId = 475557;
+        
+        beforeEach(() => {
+            window.fetch = jest.fn().mockImplementation(() => {
+                return Promise.resolve({
+                    ok: true,
+                    json: () => Promise.resolve(mockCurrentMovie)
+                })
+            })
+          });
+
+          it('should fetch correct arguments', () => {
+              const expected = [`http://localhost:3001/api/v1/users/${userId}/moviefavorites/${mockId}`, {
+                method: 'DELETE',
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              }];
+
+              deleteFavorite(userId, mockId);
+
+              expect(window.fetch).toHaveBeenCalledWith(...expected);
+          })
     });
 
 
