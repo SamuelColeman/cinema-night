@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import './Form.css';
+import './Form.css'; 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login, signUp, favouritesList, hasError } from '../../actions'
 import MoviesContainer from '../../Containers/MoviesContainer/MoviesContainer'
 import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// import MoviesContainer from '../../Components/MoviesContainer/MoviesContainer'
+
 import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls'
 
-class Form extends Component{
+export class Form extends Component{
   constructor() {
     super();
     this.state = {
@@ -18,13 +21,13 @@ class Form extends Component{
   }
 
   handleChange = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     this.setState({ [e.target.name]: e.target.value });
   }
 
   verifySignIn = async e => {
-    const { hasError } = this.props;
     e.preventDefault()
+    const { hasError } = this.props;
     const resp = await loginVerification({
       email: this.state.email,
       password: this.state.password
