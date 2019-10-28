@@ -4,7 +4,7 @@ import './MoviesContainer.css';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const MoviesContainer = ({ currentUser, movies, signOutUser, removeFavourite, handleFavourite, selectMovie }) => {
+const MoviesContainer = ({ currentUser, movies, signOutUser, selectMovie }) => {
   let button;
   if (currentUser.name === undefined || currentUser.id === null) {
     button = (
