@@ -58,6 +58,7 @@ class App extends Component {
     if (currentMovie === undefined) { 
         this.displayFavourites(currentUser.id);
         addFavourite(postedMovie, currentUser.id);
+        this.displayFavourites(currentUser.id);
         console.log('here we go posting again')
       }
       // addFavourite(postedMovie, currentUser.id);
