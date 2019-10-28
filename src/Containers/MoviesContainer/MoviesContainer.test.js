@@ -32,7 +32,7 @@ describe('MoviesContainerOfContainers', () => {
       />)
     })
 
-    it('should match snapshot with all data being passed in correctly', () => {
+    it.skip('should match snapshot with all data being passed in correctly', () => {
         expect(wrapper).toMatchSnapshot();
     })
  })
