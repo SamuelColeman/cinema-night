@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MoviesContainer should match snapshot with all data being passed in correctly 1`] = `undefined`;
+
+exports[`MoviesContainerOfContainers MoviesContainer should match snapshot with all data being passed in correctly 1`] = `undefined`;

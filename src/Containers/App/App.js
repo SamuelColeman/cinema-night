@@ -99,7 +99,7 @@ class App extends Component {
     return (
       <section className='app'>
         <Route exact path='/login' render={() => <Form /> } />
-        <Route exact path='/' render={() => <MoviesContainer selectMovie={this.selectMovie} className='movie_container' signOutUser={this.signOutUser} removeFavourite={this.removeFavourite} handleFavourite={this.handleFavourite}/> } />
+        <Route exact path='/' render={() => <MoviesContainer selectMovie={this.selectMovie} signOutUser={this.signOutUser}/> } />
         <Route exact path='/favorites' render={() => <FavouritesContainer handleFavourite={this.handleFavourite}/>} />
         <Route exact path='/movies/:id' render={({ match }) => {
             let { movies } = this.props;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addFavourite } from '../../apiCalls';
 
-const MovieCard = ({ title, poster_path, overview, id, movies, currentUser, favouritesList, removeFavourite, handleFavourite, hasError, selectMovie }) => {
+export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, selectMovie }) => {
     let currentMovie =  movies.find(movie => movie.id === id);
     let postedMovie = { 
         movie_id: currentMovie.id,
@@ -29,14 +29,11 @@ const MovieCard = ({ title, poster_path, overview, id, movies, currentUser, favo
             </section>
         )
 
-}  
+}   
 
 export const mapStateToProps = (state) => ({
-    currentUser: state.currentUser,
-    favouritesList: state.favouritesList,
     movies: state.movies,
-    hasError: state.hasError,
-    error: state.error 
+    hasError: state.hasError
 })
 
 export default connect(mapStateToProps)(MovieCard);
