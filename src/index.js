@@ -5,7 +5,7 @@ import { rootReducer } from './reducers';
 import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import './index.css';
-import App from './Components/App/App';
+import App from './Containers/App/App';
 import * as serviceWorker from './serviceWorker';
 import { HashRouter } from 'react-router-dom'
 

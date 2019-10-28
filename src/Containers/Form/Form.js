@@ -3,7 +3,7 @@ import './Form.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login, signUp, favouritesList, hasError } from '../../actions'
-import MoviesContainer from '../../Components/MoviesContainer/MoviesContainer'
+import MoviesContainer from '../../Containers/MoviesContainer/MoviesContainer'
 import { Route, Link } from 'react-router-dom';
 import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls'
 
