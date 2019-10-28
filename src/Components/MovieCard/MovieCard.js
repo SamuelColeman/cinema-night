@@ -2,7 +2,7 @@ import React from 'react';
 import './MovieCard.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { addFavourite } from '../../apiCalls';
+import { addFavourite } from '../../apiCalls';
 
 const MovieCard = ({ title, poster_path, overview, id, movies, currentUser, favouritesList, removeFavourite, handleFavourite, hasError, selectMovie }) => {
     let currentMovie =  movies.find(movie => movie.id === id);
