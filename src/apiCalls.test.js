@@ -1,5 +1,4 @@
 import { currentMovies, addFavourite, deleteFavorite, getFavourites, loginVerification, signUpVerification } from './apiCalls';
-import { signUp } from './actions';
 
  describe('apiCalls', () => {  
 
@@ -147,6 +146,7 @@ import { signUp } from './actions';
 
     describe('getFavourites', () => {
         let mockId = 475557;
+        let mockFavourites = [mockCurrentMovie];
 
         beforeEach(() => {
             window.fetch = jest.fn().mockImplementation(() => {
@@ -162,8 +162,24 @@ import { signUp } from './actions';
             expect(window.fetch).toHaveBeenCalledWith(`http://localhost:3001/api/v1/users/${mockId}/moviefavorites`)
         })
 
-        // ask if happy and sad paths need to be tested again
-        // most likely yis
+        it('should return favourites data (Happy Path)', () => {
+            getFavourites(mockId).then(results => expect(results).toEqual(mockFavourites));
+        })
+
+        it('should return an error if response is not ok (Sad Path)', () => {
+            window.fetch = jest.fn().mockImplementation(() => {
+              return Promise.resolve({
+                  ok: false
+              });
+            })
+        })
+    
+        it('should return an error if fetch fails ', () => {
+          window.fetch = jest.fn().mockImplementation(() => {
+              return Promise.reject(Error('Failed to fetch'))
+          });
+          expect(getFavourites()).rejects.toEqual(Error('Failed to fetch'));
+        })
     });
 
     describe('deleteFavorite', () => {
@@ -189,7 +205,6 @@ import { signUp } from './actions';
               }];
 
               deleteFavorite(userId, mockId);
-
               expect(window.fetch).toHaveBeenCalledWith(...expected);
           })
     });
