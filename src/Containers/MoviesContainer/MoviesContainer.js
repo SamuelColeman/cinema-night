@@ -4,7 +4,7 @@ import './MoviesContainer.css';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-export const MoviesContainer = ({ currentUser, movies, signOutUser, selectMovie }) => {
+export const MoviesContainer = ({ currentUser, movies, signOutUser, selectMovie, favouritesList }) => {
   // let button;
   // if (currentUser.name === undefined || currentUser.id === null) {
     let signINbutton = (
@@ -22,9 +22,16 @@ export const MoviesContainer = ({ currentUser, movies, signOutUser, selectMovie 
     )
   // }
   const loopMovies = movies.map((movie) => {
-      return <MovieCard key={movie.id}
+    console.log('favorites list--->', favouritesList.favorites)
+    if(favouritesList.favorites.find(film => film.title === movie.title)) {
+      return <MovieCard status="isFavorited" key={movie.id}
+      selectMovie={selectMovie}
+                {...movie} />
+    } else {
+      return <MovieCard status="" key={movie.id}
               selectMovie={selectMovie}
                         {...movie} />
+    }
   })
     return (
         <section className='movies-containers'>
@@ -49,7 +56,8 @@ export const MoviesContainer = ({ currentUser, movies, signOutUser, selectMovie 
 
 export const mapStateToProps = (state) => ({
   currentUser: state.currentUser,
-  movies: state.movies
+  movies: state.movies,
+  favouritesList: state.favouritesList,
 })
 
 export default connect(mapStateToProps)(MoviesContainer);

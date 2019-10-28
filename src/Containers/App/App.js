@@ -36,10 +36,12 @@ class App extends Component {
   }
 
   handleFavourite = (movie) => {
-    let { currentUser, errorMsg, hasError } = this.props;
+    let { currentUser, errorMsg, hasError, favouritesList } = this.props;
     console.log(currentUser)
     if (currentUser.isSignedIn === true) {
       this.toggleFavourites(movie)
+      // let favoritedMovies = favouritesList.favorites.map(favorite => favorite.addClass('active'))
+      // console.log('------->', favoritedMovies)
       hasError('');
     } else {
       hasError('Must be signed in to favourite!');
@@ -58,15 +60,12 @@ class App extends Component {
         vote_average: movie.vote_average,
         overview: movie.overview
      }
-    console.log(currentMovie)
     if (currentMovie === undefined) { 
         this.displayFavourites(currentUser.id);
         addFavourite(postedMovie, currentUser.id);
         this.displayFavourites(currentUser.id);
         console.log('here we go posting again')
       }
-      // addFavourite(postedMovie, currentUser.id);
-      // this.displayFavourites(currentUser.id);
       this.displayFavourites(currentUser.id);
       this.removeFavourite(currentMovie);
       this.displayFavourites(currentUser.id);

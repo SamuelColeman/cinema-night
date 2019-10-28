@@ -7,6 +7,11 @@
 	background: rgba(48,52,63,.7)
 }
 
+.isFavorited {
+	background-color:red;
+	border: 3px solid red
+}
+
 .movie_card:hover {
 	transform: scale(1.1); 
 	}
