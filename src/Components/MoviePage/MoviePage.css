@@ -1,0 +1,21 @@
+.movie_page {
+	border: 1px solid black;
+	text-align: center;
+}
+
+.movie__page--image {
+	width: 50%;
+}
+
+h2,
+h3 {
+	color: white;
+  padding: 3% 25%;
+  margin: 0px;
+}
+
+.movie__page--title {
+	color: white;
+  padding: 1% 25%;
+  font-size: 6vh;
+}

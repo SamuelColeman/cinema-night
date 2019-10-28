@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Form.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login, signUp, favouritesList, hasError } from '../../actions'
@@ -83,12 +84,14 @@ class Form extends Component{
      const { email, password, error } = this.state;
     return (
         <form>
+            <h2>Email:</h2>
             <input placeholder='Email' 
                    type='email'
                    name='email'
                    value={email} 
                    onChange={this.handleChange} />
             <h1>{error}</h1>
+            <h2>Password:</h2>
             <input placeholder='Password must 8 characters' 
                    type='password'
                    name='password'

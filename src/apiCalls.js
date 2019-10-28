@@ -3,6 +3,7 @@ export const currentMovies = async () => {
   const data = await response.json();
   data.results.forEach(movie => {
   	movie.poster_path = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    movie.backdrop_path = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
   })
   return data.results;
 }
@@ -50,6 +51,7 @@ export const addFavourite = async ( id, movie ) => {
   const resp =  await fetch(`http://localhost:3001/api/v1/users/${id}/moviefavorites`, options);
   const data = await resp.json();
   console.log(data)
+  return data
 }
 
 export const getFavourites = async ( id ) => {
