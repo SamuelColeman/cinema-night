@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Form.css';
+import './Form.css'; 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login, signUp, favouritesList, hasError } from '../../actions'
@@ -7,7 +7,7 @@ import MoviesContainer from '../MoviesContainer/MoviesContainer'
 import { Route, Link } from 'react-router-dom';
 import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls'
 
-class Form extends Component{
+export class Form extends Component{
   constructor() {
     super();
     this.state = {
