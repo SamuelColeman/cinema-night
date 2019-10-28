@@ -3,6 +3,9 @@ import { currentMovies, deleteFavorite, addFavourite, getFavourites } from '../.
 import { getMovies, isLoading, hasError } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+// import MoviesContainer from '../../Components/MoviesContainer/MoviesContainer';
+
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MoviePage from '../MoviePage/MoviePage';
 import FavouritesContainer from '../FavouritesContainer/FavouritesContainer';
