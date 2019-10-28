@@ -17,7 +17,7 @@ const MovieCard = ({ title, poster_path, overview, id ,movies, currentUser, favo
             <section className='movie_card' id={id}>
                 <h1>{ title }</h1>
                 <img className="movie__card--img" src={poster_path} alt={title} />
-                <button onClick={(e) => handleFavourite(e, currentMovie)}>Favorite</button>
+                <button onClick={(e) => handleFavourite(e, currentMovie, postedMovie)}>Favorite</button>
                 <h1>{ hasError }</h1>
                 {/* addFavourite( postedMovie, currentUser.id ) */}
                 {/* removeFavourite(id) */}

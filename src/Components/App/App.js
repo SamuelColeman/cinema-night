@@ -39,25 +39,27 @@ class App extends Component {
     currentUser.isSignedIn=false;
   }
 
-  handleFavourite = (e, movie) => {
+  handleFavourite = (e, movie, postedMovie) => {
+    e.preventDefault()
     console.log('MOVIE-->', movie)
     let { currentUser, hasError } = this.props;
     console.log(currentUser.favorites)
     if (currentUser.isSignedIn === true) {
-      this.toggleFavourites(e, movie)
+      this.toggleFavourites(e, movie, postedMovie)
       hasError('');
     } else {
       hasError('Must be signed in to favourite!');
     }
   }
 
-  toggleFavourites = (e, movie) => {
+  toggleFavourites = (e, movie, postedMovie) => {
+    console.log('IN TOGGLE', 'movie', movie, 'posted', postedMovie)
     e.preventDefault()
     let id = this.props.currentUser.id
     if(this.props.favouritesList.favorites.map(favorite => favorite.title).includes(movie.title)) {
       this.removeFavourite(id, movie.id)
     } else {
-      this.postFavourite(id, movie)
+      this.postFavourite(id, postedMovie)
     }
     }
 

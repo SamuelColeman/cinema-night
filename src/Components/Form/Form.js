@@ -23,7 +23,6 @@ class Form extends Component{
   }
 
   verifySignIn = async e => {
-    console.log(this.props, this.state)
     const { hasError } = this.props;
     e.preventDefault()
     const resp = await loginVerification({
@@ -123,12 +122,24 @@ export const mapDispatchToProps = (dispatch) => (
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
 
 Form.propTypes = {
-  currentUser: PropTypes.object.isRequired,
+  currentUser: PropTypes.shape({
+    name: PropTypes.string,
+    id: PropTypes.number,
+    isSignedIn: PropTypes.bool
+  }).isRequired,
   favouritesList: PropTypes.func,
   hasError: PropTypes.func,
   login: PropTypes.func,
   signUp: PropTypes.func,
   users: PropTypes.object,
-  email: PropTypes.string,
-  password: PropTypes.string,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired
+}
+
+Form.defaultProps = {
+  currentUser: {},
+  email: '',
+  password: '',
+  error: ''
 }

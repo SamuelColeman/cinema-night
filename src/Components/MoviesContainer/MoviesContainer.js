@@ -57,9 +57,14 @@ export const mapStateToProps = (state) => ({
 export default connect(mapStateToProps)(MoviesContainer);
 
 MoviesContainer.propTypes = {
-  currentUser: PropTypes.object,
-  movies: PropTypes.arrayOf(PropTypes.object),
-  signOutUser: PropTypes.func,
-  removeFavourite: PropTypes.func,
+  currentUser: PropTypes.object.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  signOutUser: PropTypes.func.isRequired,
+  removeFavourite: PropTypes.func.isRequired,
   handleFavorite: PropTypes.func
+}
+
+MoviesContainer.defaultProps = {
+  currentUser: {},
+  movies: []
 }
