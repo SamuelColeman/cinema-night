@@ -1,8 +1,7 @@
 .movie_card {
-	border: 1px solid black;
+	border: 1px solid white;
 	width: 31%;
 	text-align: center;
-	background-color: #E1E1E1;
 	margin-top: 1%;
 }
 
@@ -16,5 +15,16 @@ h1 {
 }
 
 button {
-	display: block;
+	width: 40%;
+  height: 4%;
+  border-radius: 15px;
+  background: transparent;
+  color: white;
+  font-size: 15px;
+  margin: 4%;
+}
+
+button:hover {
+	background: white;
+	color: black;
 }
