@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import './Form.css'; 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login, signUp, favouritesList, hasError } from '../../actions'
-import MoviesContainer from '../MoviesContainer/MoviesContainer'
-import { Route, Link } from 'react-router-dom';
+import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import { Link } from 'react-router-dom';
+// import MoviesContainer from '../../Components/MoviesContainer/MoviesContainer'
+
 import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls'
 
-class Form extends Component{
+export class Form extends Component{
   constructor() {
     super();
     this.state = {
@@ -17,13 +20,13 @@ class Form extends Component{
   }
 
   handleChange = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     this.setState({ [e.target.name]: e.target.value });
   }
 
   verifySignIn = async e => {
-    const { hasError } = this.props;
     e.preventDefault()
+    const { hasError } = this.props;
     const resp = await loginVerification({
       email: this.state.email,
       password: this.state.password
@@ -82,12 +85,14 @@ class Form extends Component{
      const { email, password, error } = this.state;
     return (
         <form>
+            <h2>Email:</h2>
             <input placeholder='Email' 
                    type='email'
                    name='email'
                    value={email} 
                    onChange={this.handleChange} />
             <h1>{error}</h1>
+            <h2>Password:</h2>
             <input placeholder='Password must 8 characters' 
                    type='password'
                    name='password'

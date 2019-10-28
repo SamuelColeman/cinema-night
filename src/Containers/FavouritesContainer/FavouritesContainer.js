@@ -15,7 +15,6 @@ const FavouritesContainer = ({ favouritesList, handleFavourite }) => {
 }
 	return (
 		<section>
-			<h1>Favourites:</h1>
 			{mapFavorites}
 		</section>
 	)
