@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addFavourite } from '../../apiCalls';
 
-const MovieCard = ({ title, poster_path, overview, id, movies, hasError, selectMovie }) => {
+export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, selectMovie }) => {
     let currentMovie =  movies.find(movie => movie.id === id);
     let postedMovie = { 
         movie_id: currentMovie.id,
