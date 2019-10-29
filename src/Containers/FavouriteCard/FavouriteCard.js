@@ -9,11 +9,8 @@ const FavouriteCard = ({ handleFavourite, movie, hasError }) => {
                 <img className="favourites__card--img" src={movie.poster_path} alt={movie.title} />
                 <button onClick={() => handleFavourite( movie )}>Favorite</button>
                 <h1>{ hasError }</h1>
-                {/* addFavourite( postedMovie, currentUser.id ) */}
-                {/* removeFavourite(id) */}
             </section>
         )
-
 }  
 
 export const mapStateToProps = (state) => ({

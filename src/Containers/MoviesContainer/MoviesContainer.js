@@ -4,26 +4,21 @@ import './MoviesContainer.css';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-export const MoviesContainer = ({ currentUser, movies, signOutUser, selectMovie }) => {
-  // let button;
-  // if (currentUser.name === undefined || currentUser.id === null) {
+export const MoviesContainer = ({ currentUser, movies, signOutUser, handleFavourite }) => {
     let signINbutton = (
       <NavLink className="title-link" to='/login'>
         <h4 className="h4--login" onClick={signOutUser}>Sign In</h4>
         {/* <button>Sign In</button> */}
       </NavLink>
     )
-  // } else {
     let signOUTbutton = (
       <NavLink className="title-link" to='/login'>
         <h4 className="h4--login" onClick={signOutUser}>Sign Out</h4>
-        {/* <button onClick={signOutUser}>Sign Out</button> */}
       </NavLink>
     )
-  // }
   const loopMovies = movies.map((movie) => {
       return <MovieCard key={movie.id}
-              selectMovie={selectMovie}
+              handleFavourite={handleFavourite}
                         {...movie} />
   })
     return (
@@ -35,9 +30,7 @@ export const MoviesContainer = ({ currentUser, movies, signOutUser, selectMovie 
           <Link to='/favorites'>
             <h4 className="h4--view-favorites title-link">View Favorites</h4>
           </Link>
-        {/* {button} */}
         { currentUser.name === undefined || currentUser.id === null ? signINbutton : signOUTbutton }
-
         </div>
           </header>
           <div className="movies">

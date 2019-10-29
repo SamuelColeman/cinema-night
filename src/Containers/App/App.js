@@ -3,9 +3,6 @@ import { currentMovies, deleteFavorite, addFavourite, getFavourites } from '../.
 import { getMovies, isLoading, hasError } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-// import MoviesContainer from '../../Components/MoviesContainer/MoviesContainer';
-
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MoviePage from '../MoviePage/MoviePage';
 import FavouritesContainer from '../FavouritesContainer/FavouritesContainer';
@@ -32,78 +29,56 @@ class App extends Component {
     currentUser.name = '';
     currentUser.id = null;
     currentUser.isSignedIn=false;
-    console.log(currentUser)
   }
 
   handleFavourite = (movie) => {
     let { currentUser, errorMsg, hasError } = this.props;
-    console.log(currentUser)
     if (currentUser.isSignedIn === true) {
       this.toggleFavourites(movie)
       hasError('');
     } else {
       hasError('Must be signed in to favourite!');
     }
-    console.log(currentUser)
   }
 
   toggleFavourites = async (movie) => {
     let { currentUser, favouritesList } = this.props;
-    let currentMovie = favouritesList.favorites.find(film => film.movie_id === movie.id);
-    let postedMovie = { 
-        movie_id: movie.id,
-        title: movie.title,
-        poster_path: movie.poster_path,
-        release_date: movie.release_date,
-        vote_average: movie.vote_average,
-        overview: movie.overview
-     }
-    console.log(currentMovie)
+    let currentMovie = favouritesList.favorites.find(film => film.title === movie.title);
     if (currentMovie === undefined) { 
         this.displayFavourites(currentUser.id);
-        addFavourite(postedMovie, currentUser.id);
+        addFavourite(movie, currentUser.id);
         this.displayFavourites(currentUser.id);
-        console.log('here we go posting again')
+      } else {
+        this.removeFavourite(currentMovie);
       }
-      // addFavourite(postedMovie, currentUser.id);
-      // this.displayFavourites(currentUser.id);
-      this.displayFavourites(currentUser.id);
-      this.removeFavourite(currentMovie);
-      this.displayFavourites(currentUser.id);
+    this.displayFavourites(currentUser.id);
   }
 
   removeFavourite = async (movie) => {
     const { favouritesList, currentUser } = this.props; 
      try {
       const deletedmovies = await deleteFavorite(movie.user_id, movie.movie_id);
-      this.displayFavourites(currentUser.id)
     } catch (error) {
       hasError(error.message)
     }
+    this.displayFavourites(currentUser.id);
   }
 
   displayFavourites = async (id) => {
       let { favouritesList } = this.props;
-      const resp = await getFavourites(id);
-      if(resp.favorites) {
-        favouritesList.favorites = resp.favorites;
-      }
-      console.log(favouritesList)
-  }
-
-  selectMovie = e => {
-    e.preventDefault();
-    let { movies, favouritesList } = this.props;
-    let movieTarget = parseInt(e.target.closest('section').id);
-    let foundMovie = movies.find(film => film.id === movieTarget)
-    this.handleFavourite(foundMovie);
+      try {
+        const resp = await getFavourites(id);
+            favouritesList.favorites = resp.favorites;
+          } catch (error) {
+            console.log(error)
+          }
   }
 
   render() {
     return (
       <section className='app'>
         <Route exact path='/login' render={() => <Form /> } />
-        <Route exact path='/' render={() => <MoviesContainer selectMovie={this.selectMovie} signOutUser={this.signOutUser}/> } />
+        <Route exact path='/' render={() => <MoviesContainer handleFavourite={this.handleFavourite} signOutUser={this.signOutUser}/> } />
         <Route exact path='/favorites' render={() => <FavouritesContainer handleFavourite={this.handleFavourite}/>} />
         <Route exact path='/movies/:id' render={({ match }) => {
             let { movies } = this.props;
