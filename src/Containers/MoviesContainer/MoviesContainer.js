@@ -68,3 +68,8 @@ MoviesContainer.propTypes = {
   removeFavourite: PropTypes.func.isRequired,
   handleFavorite: PropTypes.func
 }
+
+MoviesContainer.defaultProps = {
+  currentUser: {},
+  movies: []
+}
