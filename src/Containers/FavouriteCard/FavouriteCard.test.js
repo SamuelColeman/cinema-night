@@ -21,6 +21,7 @@ import { FavouriteCard, mapStateToProps } from './FavouriteCard';
             movie={mockSelectedMovie}
             handleFavourite={mockHandleFavourite}
             hasError={mockError}
+            {...mockSelectedMovie}
           />)
         })
     
