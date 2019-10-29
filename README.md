@@ -31,5 +31,9 @@ Cinema Night was built using:
 
 ![Screen Shot 2019-10-29 at 5 05 00 PM](https://user-images.githubusercontent.com/50784336/67816024-41468d00-fa6e-11e9-835b-48099e077cf9.png)
 
+![Screen Shot 2019-10-29 at 5 06 43 PM](https://user-images.githubusercontent.com/50784336/67816095-7d79ed80-fa6e-11e9-9372-d3da10dbd537.png)
+
+![screencapture-localhost-3000-2019-10-29-17_08_07](https://user-images.githubusercontent.com/50784336/67816164-bade7b00-fa6e-11e9-8d9b-7418d27186f6.png)
+
 ![screencapture-localhost-3000-2019-10-29-16_54_33](https://user-images.githubusercontent.com/50784336/67815776-78686e80-fa6d-11e9-92a4-4b536f066f89.png)
 
