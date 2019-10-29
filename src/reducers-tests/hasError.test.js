@@ -1,7 +1,7 @@
-import { hasError } from '../reducers/email';
+import { hasError } from '../reducers/hasError';
 
 describe('hasError', () => {
-    it.skip('should return initial state', () => {
+    it('should return initial state', () => {
         const expected = '';
 
         const result = hasError(undefined, '');
@@ -11,14 +11,13 @@ describe('hasError', () => {
 
     it('should return state with an error', () => {
        const mockAction = {
-           type: 'GET_EMAIL',
+           type: 'HAS_ERROR',
            errorMsg: 'Testing Sucks'
        }
 
        const expected = 'Testing Sucks'
 
        const result = hasError(undefined, mockAction);
-
        expect(result).toEqual(expected);
     })
 })
