@@ -13,6 +13,20 @@ import { FavouriteCard, mapStateToProps } from './FavouriteCard';
           "overview": "It's cool.",
           "release_date": "2019-10-18"
         }
-          
+        let mockError ='Error'
+
+        beforeEach(() => {
+          wrapper = shallow(<FavouriteCard 
+            key={mockSelectedMovie.movie_id}
+            movie={mockSelectedMovie}
+            handleFavourite={mockHandleFavourite}
+            hasError={mockError}
+          />)
+        })
+    
+        it('should match snapshot with all data passing through correctly', () => {
+            expect(wrapper).toMatchSnapshot();
   })
+
+})
         

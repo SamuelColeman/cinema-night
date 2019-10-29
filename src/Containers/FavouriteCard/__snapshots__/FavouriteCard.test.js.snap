@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FavouriteCard should match snapshot with all data passing through correctly 1`] = `undefined`;

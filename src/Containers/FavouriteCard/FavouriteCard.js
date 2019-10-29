@@ -2,7 +2,7 @@ import React from 'react';
 import './FavouriteCard.css';
 import { connect } from 'react-redux';
 
-const FavouriteCard = ({ handleFavourite, movie, hasError }) => {
+export const FavouriteCard = ({ handleFavourite, movie, hasError }) => {
         return (
             <section className='favourites_card'>
                 <h1 className='favourites__card--title'>{ movie.title }</h1>
