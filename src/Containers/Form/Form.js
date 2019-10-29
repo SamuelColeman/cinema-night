@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { login, signUp, favouritesList, hasError } from '../../actions'
 import MoviesContainer from '../../Containers/MoviesContainer/MoviesContainer'
 import { Route, Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
 // import { Link } from 'react-router-dom';
 // import MoviesContainer from '../../Components/MoviesContainer/MoviesContainer'
 
@@ -125,3 +126,19 @@ export const mapDispatchToProps = (dispatch) => (
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
+
+Form.propTypes = {
+  currentUser: PropTypes.shape({
+    name: PropTypes.string,
+    id: PropTypes.number,
+    isSignedIn: PropTypes.bool
+  }).isRequired,
+  favouritesList: PropTypes.func,
+  hasError: PropTypes.func,
+  login: PropTypes.func,
+  signUp: PropTypes.func,
+  users: PropTypes.object,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired
+}
