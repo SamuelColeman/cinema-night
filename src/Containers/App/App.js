@@ -8,7 +8,7 @@ import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MoviePage from '../MoviePage/MoviePage';
 import FavouritesContainer from '../FavouritesContainer/FavouritesContainer';
 import Form from '../Form/Form';
-import { Route, NavLink, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './App.css'
 
 class App extends Component {
@@ -32,7 +32,7 @@ class App extends Component {
   }
 
   handleFavourite = (movie) => {
-    let { currentUser, errorMsg, hasError } = this.props;
+    let { currentUser, hasError } = this.props;
     if (currentUser.isSignedIn === true) {
       this.toggleFavourites(movie)
       hasError('');
@@ -55,9 +55,9 @@ class App extends Component {
   }
 
   removeFavourite = async (movie) => {
-    const { favouritesList, currentUser } = this.props; 
+    const { currentUser } = this.props; 
      try {
-      const deletedmovies = await deleteFavorite(movie.user_id, movie.movie_id);
+      await deleteFavorite(movie.user_id, movie.movie_id);
     } catch (error) {
       hasError(error.message)
     }
