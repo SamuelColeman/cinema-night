@@ -17,14 +17,15 @@ export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, 
 
         return (
            <section className="movie_card" id={id}> 
+           <section className="movie__div--fave">
+                <h1 className="movie__h1--error">{ hasError }</h1>
                 <img src={fave} id={currentMovie.title} className= {active} onClick={() => handleFavourite(postedMovie)}></img>
-
+                </section>
                 <Link to={`/movies/${id}`}>
-                    <div>
-                        <h1>{ title }</h1>
+                    
+                        <h1 className="movie__card--title">{ title }</h1>
                         <img className="movie__card--img" src={poster_path} alt={title} />
-                        <h1>{ hasError }</h1>
-                    </div>
+    
                 </Link>    
             </section>
         )

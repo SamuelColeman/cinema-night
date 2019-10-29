@@ -2,7 +2,7 @@ import React from 'react';
 import './MoviePage.css';
 import { Link } from 'react-router-dom';
 
- const MoviePage = ({ title, id, backdrop_path, poster_path, overview, release_date, vote_average }) => {
+ export const MoviePage = ({ title, id, backdrop_path, poster_path, overview, release_date, vote_average }) => {
 	return (
 		<section className='movie_page' id={id}>
 			<div className="movie__div--card">
