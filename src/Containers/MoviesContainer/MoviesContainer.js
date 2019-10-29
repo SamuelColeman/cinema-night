@@ -5,12 +5,11 @@ import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 
-export const MoviesContainer = ({ currentUser, movies, signOutUser, handleFavourite }) => {
+export const MoviesContainer = ({ currentUser, movies, signOutUser, handleFavourite, favouritesList }) => {
 
     let signINbutton = (
       <NavLink className="title-link" to='/login'>
         <h4 className="h4--login" onClick={signOutUser}>Sign In</h4>
-        {/* <button>Sign In</button> */}
       </NavLink>
     )
     let signOUTbutton = (
@@ -19,9 +18,15 @@ export const MoviesContainer = ({ currentUser, movies, signOutUser, handleFavour
       </NavLink>
     )
   const loopMovies = movies.map((movie) => {
-      return <MovieCard key={movie.id}
+    if (favouritesList.favorites && favouritesList.favorites.find(film => film.title === movie.title)) {
+      return <MovieCard key={movie.id} active='active'
               handleFavourite={handleFavourite}
                         {...movie} />
+    } else {
+      return <MovieCard key={movie.id} active='inactive'
+              handleFavourite={handleFavourite}
+                        {...movie} />
+    }
   })
     return (
         <section className='movies-containers'>

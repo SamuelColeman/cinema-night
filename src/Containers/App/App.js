@@ -25,10 +25,11 @@ export class App extends Component {
   }
 
   signOutUser = () => {
-    let { currentUser } = this.props;
+    let { currentUser, favouritesList } = this.props;
     currentUser.name = '';
     currentUser.id = null;
-    currentUser.isSignedIn=false;
+    currentUser.isSignedIn = false;
+    favouritesList.favorites = [];
   }
 
   handleFavourite = (movie) => {
@@ -41,14 +42,24 @@ export class App extends Component {
     }
   }
 
+  updateFavourites = (movie) => {
+    if (document.getElementById(movie.title)) {
+      document.getElementById(movie.title).removeAttribute('class');
+    } else {   
+      document.getElementById(movie.poster_path).setAttribute('hidden', 'true');
+    }
+  }
+
   toggleFavourites = async (movie) => {
     let { currentUser, favouritesList } = this.props;
     let currentMovie = favouritesList.favorites.find(film => film.title === movie.title);
-    if (currentMovie === undefined) { 
+    if (currentMovie === undefined) {
+        document.getElementById(movie.title).setAttribute('class', 'active');
         this.displayFavourites(currentUser.id);
         addFavourite(movie, currentUser.id);
         this.displayFavourites(currentUser.id);
       } else {
+        this.updateFavourites(currentMovie);
         this.removeFavourite(currentMovie);
       }
     this.displayFavourites(currentUser.id);
@@ -71,7 +82,7 @@ export class App extends Component {
             favouritesList.favorites = resp.favorites;
           } catch (error) {
             console.log(error)
-          }
+      }
   }
 
   render() {
@@ -97,8 +108,7 @@ export const mapStateToProps = (state) => ({
   movies: state.movies,
   error: state.error,
   currentUser: state.currentUser,
-  favouritesList: state.favouritesList,
-  selectedMovie: state.selectedMovie
+  favouritesList: state.favouritesList
 });
 
 export const mapDispatchToProps = (dispatch) => (
@@ -121,14 +131,12 @@ App.propTypes = {
   favorites: PropTypes.arrayOf(PropTypes.object),
   getMovies: PropTypes.func,
   hasError: PropTypes.func,
-  isLoading: PropTypes.func,
-  selectedMovie: PropTypes.object
+  isLoading: PropTypes.func
 }
 
 App.defaultProps = { 
   isLoading: true,
   movies: [],
   currentUser: {},
-  favorites: [],
-  selectedMovie: {}
+  favorites: []
 }

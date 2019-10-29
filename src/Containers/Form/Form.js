@@ -54,7 +54,6 @@ export class Form extends Component{
       } else {
       this.setState({error: ''})
     }
-    console.log(resp.favorites)
   }
 
   verifySignUp = async e => {
