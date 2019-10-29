@@ -3,8 +3,10 @@ import './Form.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login, signUp, favouritesList, hasError } from '../../actions'
-import MoviesContainer from '../MoviesContainer/MoviesContainer';
+// import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import { Link } from 'react-router-dom';
+import MoviesContainer from '../../Containers/MoviesContainer/MoviesContainer'
+import PropTypes from 'prop-types'
 import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls'
 
 export class Form extends Component{
@@ -121,3 +123,26 @@ export const mapDispatchToProps = (dispatch) => (
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
+
+Form.propTypes = {
+  currentUser: PropTypes.shape({
+    name: PropTypes.string,
+    id: PropTypes.number,
+    isSignedIn: PropTypes.bool
+  }).isRequired,
+  favouritesList: PropTypes.func,
+  hasError: PropTypes.func,
+  login: PropTypes.func,
+  signUp: PropTypes.func,
+  users: PropTypes.object,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired
+}
+
+Form.defaultProps = {
+  currentUser: {},
+  email: '',
+  password: '',
+  error: ''
+}

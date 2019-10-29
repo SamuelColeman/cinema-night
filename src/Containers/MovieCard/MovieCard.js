@@ -2,9 +2,9 @@ import React from 'react';
 import './MovieCard.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addFavourite } from '../../apiCalls';
 
 export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, handleFavourite }) => {
+
     let currentMovie =  movies.find(movie => movie.id === id);
     let postedMovie = { 
         movie_id: currentMovie.id,
@@ -14,8 +14,9 @@ export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, 
         vote_average: currentMovie.vote_average,
         overview: currentMovie.overview
      }
+
         return (
-           <section className='movie_card' id={id}> 
+           <section className="movie_card" id={id}> 
                 <Link to={`/movies/${id}`}>
                     <div>
                         <h1>{ title }</h1>

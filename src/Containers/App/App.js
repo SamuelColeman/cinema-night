@@ -3,6 +3,7 @@ import { currentMovies, deleteFavorite, addFavourite, getFavourites } from '../.
 import { getMovies, isLoading, hasError } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MoviePage from '../MoviePage/MoviePage';
 import FavouritesContainer from '../FavouritesContainer/FavouritesContainer';
@@ -11,7 +12,6 @@ import { Route, NavLink, Link } from 'react-router-dom';
 import './App.css'
 
 class App extends Component {
-
   async componentDidMount() {
     const { getMovies, hasError, isLoading } = this.props;
     try {
@@ -110,3 +110,25 @@ export const mapDispatchToProps = (dispatch) => (
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+App.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentUser: PropTypes.shape({
+    name: PropTypes.string,
+    id: PropTypes.number,
+    isSignedIn: PropTypes.bool
+  }),
+  favorites: PropTypes.arrayOf(PropTypes.object),
+  getMovies: PropTypes.func,
+  hasError: PropTypes.func,
+  isLoading: PropTypes.func,
+  selectedMovie: PropTypes.object
+}
+
+App.defaultProps = {
+  isLoading: true,
+  movies: [],
+  currentUser: {},
+  favorites: [],
+  selectedMovie: {}
+}
