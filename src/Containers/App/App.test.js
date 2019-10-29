@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { App, mapStateToProps } from './App';
 
-import { currentMovies, addFavourite, deleteFavorite } from '../../apiCalls';
+import { currentMovies, addFavourite, deleteFavorite, getFavourites } from '../../apiCalls';
 
 
 jest.mock('../../apiCalls');
@@ -14,7 +14,8 @@ describe('App', () => {
   let mockMovies;
   let mockAddFavourite;
   let mockRemoveFavourite;
-  let mockFavouriteList
+  let mockFavouriteList;
+  let mockIsLoading = jest.fn();
 
     mockMovies = [{
       popularity: 462.91,
@@ -66,7 +67,7 @@ describe('App', () => {
           }
     ]
 
-    mockFavouriteList = [
+    mockFavouriteList = { favorites: [
       {
         "poster_path": "/gibberish.jpg",
         "movie_id": 222222,
@@ -76,11 +77,13 @@ describe('App', () => {
         "release_date": "2019-10-18"
       }
     ]
+  }
     const mockDisplayFavorites = jest.fn();
     const mockUser = {
       name:'Pants',
       id:2,
       email:'pants@gmail.com',
+      isSignedIn: true
     }
 
       currentMovies.mockImplementation(() => {
@@ -92,30 +95,41 @@ describe('App', () => {
       deleteFavorite.mockImplementation(() => {
         return Promise.resolve(mockMovies)
       })
+      getFavourites.mockImplementation(() => {
+        return Promise.resolve(mockFavouriteList)
+      })
   
 
   beforeEach(() => {
     wrapper = shallow(<App 
-        movies = {mockDisplayFavorites}
-        favouriteList = {mockFavouriteList}
+        movies = {mockMovies}
+        favouritesList = {mockFavouriteList}
         removeFavourite = {mockRemoveFavourite}
         currentUser = {mockUser}
+        isLoading = {mockIsLoading}
      />)
  })
 
-it('should match snapshot with correct data passing through', () => {
+  it('should match snapshot with correct data passing through', () => {
     expect(wrapper).toMatchSnapshot();
-  })
+  });
 
-  it.skip('should call getMovies when componentDidMount is called', () => {
-    wrapper.instance().componentDidMount();
-
+  it('should update loading and fetch movies', () => {
+    expect(mockIsLoading).toHaveBeenCalledWith(true);
     expect(currentMovies).toHaveBeenCalled();
-  })
+    expect(mockIsLoading).toHaveBeenCalledWith(false);
+  });
 
-  // test isLoading to have been called
-  // test hasError to have been called
-  // test change of state, will need to go over redux testing class
+  it('should invoke get favourites when display favourites is called', async () => {
+  await wrapper.instance().displayFavourites(mockUser.id)
+  expect(getFavourites).toHaveBeenCalledWith(mockUser.id);
+  });
+
+  it('should clear currentUser and favouritesList when signOutUser is called', () => {
+    wrapper.instance().signOutUser();
+    expect(mockUser).toEqual({ email: '', name: '', id: null, isSignedIn: false });
+    expect(mockFavouriteList.favorites).toEqual([]);
+  });
 })
 
 
