@@ -27,6 +27,22 @@ import { FavouriteCard, mapStateToProps } from './FavouriteCard';
         it('should match snapshot with all data passing through correctly', () => {
             expect(wrapper).toMatchSnapshot();
   })
-
 })
+
+describe('mapStateToProps', () => {
+  it('should return an object with the movies state',  () => {
+      const mockState = {
+        hasError: 'Error'
+      }
+
+      const expected = {
+        hasError: 'Error'
+      }
+
+      const mappedProps = mapStateToProps(mockState);
+
+      expect(mappedProps).toEqual(expected);
+  })
+})
+
         

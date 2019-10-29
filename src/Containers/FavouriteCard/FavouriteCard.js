@@ -14,11 +14,11 @@ export const FavouriteCard = ({ handleFavourite, movie, hasError }) => {
 }  
 
 export const mapStateToProps = (state) => ({
-    currentUser: state.currentUser,
-    favouritesList: state.favouritesList,
-    movies: state.movies,
+    // currentUser: state.currentUser,
+    // favouritesList: state.favouritesList,
+    // movies: state.movies,
     hasError: state.hasError,
-    error: state.error 
+    // error: state.error 
 })
 
 export default connect(mapStateToProps)(FavouriteCard);
