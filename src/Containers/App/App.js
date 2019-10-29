@@ -42,6 +42,14 @@ class App extends Component {
     }
   }
 
+  updateFavourites = (movie) => {
+    if (document.getElementById(movie.title)) {
+      document.getElementById(movie.title).removeAttribute('class');
+    } else {   
+      document.getElementById(movie.poster_path).setAttribute('hidden', 'true');
+    }
+  }
+
   toggleFavourites = async (movie) => {
     let { currentUser, favouritesList } = this.props;
     let currentMovie = favouritesList.favorites.find(film => film.title === movie.title);
@@ -51,8 +59,7 @@ class App extends Component {
         addFavourite(movie, currentUser.id);
         this.displayFavourites(currentUser.id);
       } else {
-        // document.getElementById(movie.title).removeAttribute('class');
-        document.getElementById(movie.poster_path).setAttribute('hidden', 'true');
+        this.updateFavourites(currentMovie);
         this.removeFavourite(currentMovie);
       }
     this.displayFavourites(currentUser.id);
