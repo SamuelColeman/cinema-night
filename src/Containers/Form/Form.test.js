@@ -202,9 +202,10 @@ describe('FormContainer',  () => {
 
     describe('mapDispatchToProps', () => {
       //login
-      it.skip('should dispatch login when verifySignIn is called',  () => {
-          const mockDispatch = jest.fn();
-          const actionToDispatch = login('Bob', 1, false);
+        const mockDispatch = jest.fn();
+      it('should dispatch login when verifySignIn is called',  () => {
+    
+          const actionToDispatch = login({ name:'Bob', id: 1, isSignedIn: false });
 
           const mappedProps = mapDispatchToProps(mockDispatch);
           mappedProps.verifySignIn();
