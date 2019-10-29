@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FavouriteCard should match snapshot with all data passing through correctly 1`] = `
+<section
+  className="favourites_card"
+>
+  <h1
+    className="favourites__card--title"
+  >
+    A title
+  </h1>
+  <img
+    alt="A title"
+    className="favourites__card--img"
+    src="/gibberish.jpg"
+  />
+  <button
+    onClick={[Function]}
+  >
+    Favorite
+  </button>
+  <h1>
+    Error
+  </h1>
+</section>
+`;

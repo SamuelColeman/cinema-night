@@ -11,7 +11,7 @@ import Form from '../Form/Form';
 import { Route } from 'react-router-dom';
 import './App.css'
 
-class App extends Component {
+export class App extends Component {
   async componentDidMount() {
     const { getMovies, hasError, isLoading } = this.props;
     try {
@@ -109,7 +109,7 @@ export const mapDispatchToProps = (dispatch) => (
   }, dispatch)
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps);
 
 App.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -125,7 +125,7 @@ App.propTypes = {
   selectedMovie: PropTypes.object
 }
 
-App.defaultProps = {
+App.defaultProps = { 
   isLoading: true,
   movies: [],
   currentUser: {},

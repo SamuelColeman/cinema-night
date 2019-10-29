@@ -35,7 +35,7 @@ export class Form extends Component{
         isSignedIn: true
       })
       this.showFavourites(resp.id)
-      hasError('');
+      hasError(''); 
     }
       if(resp.error !== undefined) {
         this.setState({error: 'Email and password do not match.'})
@@ -106,9 +106,8 @@ export class Form extends Component{
    }
 }
 
-export const mapStateToProps = ({ currentUser, users }) => ({
-    currentUser,
-    users
+export const mapStateToProps = ({ currentUser }) => ({
+    currentUser
 })
 
 export const mapDispatchToProps = (dispatch) => (
@@ -132,7 +131,6 @@ Form.propTypes = {
   hasError: PropTypes.func,
   login: PropTypes.func,
   signUp: PropTypes.func,
-  users: PropTypes.object,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired

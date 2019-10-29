@@ -84,6 +84,18 @@ import { currentMovies, addFavourite, deleteFavorite, getFavourites, loginVerifi
 
             expect(window.fetch).toHaveBeenCalledWith(...expected);
         })
+
+        it('should return movies data (Happy Path)', () => {
+          loginVerification().then(results => expect(results).toEqual(mockLogin))
+        });
+  
+        it('should return an error if response is not ok (Sad Path)', () => {
+          window.fetch = jest.fn().mockImplementation(() => {
+            return Promise.resolve({
+                ok: false
+              });
+            })
+        });
     });
 
     describe('signUpVerification', () => {
@@ -113,7 +125,20 @@ import { currentMovies, addFavourite, deleteFavorite, getFavourites, loginVerifi
               signUpVerification(mockVerification);
 
               expect(window.fetch).toHaveBeenCalledWith(...expected);
-          })
+          });
+          
+          it('should return movies data (Happy Path)', () => {
+            signUpVerification().then(results => expect(results).toEqual(mockVerification))
+          });
+    
+          it('should return an error if response is not ok (Sad Path)', () => {
+            window.fetch = jest.fn().mockImplementation(() => {
+              return Promise.resolve({
+                  ok: false
+              });
+            })
+          });
+          
     });
 
     describe('addFavourite', () => {
@@ -141,7 +166,19 @@ import { currentMovies, addFavourite, deleteFavorite, getFavourites, loginVerifi
           addFavourite(mockAddFavourite, mockId);
 
           expect(window.fetch).toHaveBeenCalledWith(...expected);
-        })
+        });
+
+        it('should return movies data (Happy Path)', () => {
+          addFavourite().then(results => expect(results).toEqual(mockAddFavourite, mockId))
+        });
+  
+        it('should return an error if response is not ok (Sad Path)', () => {
+          window.fetch = jest.fn().mockImplementation(() => {
+            return Promise.resolve({
+                ok: false
+            });
+          })
+        });
     });
 
     describe('getFavourites', () => {
@@ -206,7 +243,19 @@ import { currentMovies, addFavourite, deleteFavorite, getFavourites, loginVerifi
 
               deleteFavorite(userId, mockId);
               expect(window.fetch).toHaveBeenCalledWith(...expected);
-          })
+          });
+
+          it('should return movies data (Happy Path)', () => {
+            deleteFavorite().then(results => expect(results).toEqual(userId, mockId))
+          });
+    
+          it('should return an error if response is not ok (Sad Path)', () => {
+            window.fetch = jest.fn().mockImplementation(() => {
+              return Promise.resolve({
+                  ok: false
+              });
+            })
+          });
     });
 
 
