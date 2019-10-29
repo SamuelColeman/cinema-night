@@ -1,12 +1,41 @@
 form {
 	height: 100vh;
-	margin: 0px;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
 }
 
-input {
-	width: 72vh;
+.form-input {
+	width: 33%;
   height: 6vh;
   font-size: 4vh;
-  background: transparent;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  padding-left: 2%;
+}
+
+.form-button {
+  width: 35.5%;
+  height: 6vh;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:1%;
+  background-color: rgba(207,203,202,.5);
   color: white;
+}
+
+.form-button:hover {
+  background-color:  rgba(48,52,63,.7);
+  font-size: 1.2em;
+  font-weight:bold;
+  cursor:pointer;
+  color: white;
+}
+
+.form-title {
+  padding: 0;
+
 }

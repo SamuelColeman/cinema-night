@@ -81,24 +81,26 @@ export class Form extends Component{
      const { email, password, error } = this.state;
     return (
         <form>
-            <h2>Email:</h2>
-            <input placeholder='Email' 
+            <h2 class="form__h2--email form-title">Email:</h2>
+            <input className="form-input"
+                   placeholder='Email' 
                    type='email'
                    name='email'
                    value={email} 
                    onChange={this.handleChange} />
             <h1>{error}</h1>
-            <h2>Password:</h2>
-            <input placeholder='Password must 8 characters' 
+            <h2 class="form__h2--password form-title">Password:</h2>
+            <input className="form-input"
+                   placeholder='Password must 8 characters' 
                    type='password'
                    name='password'
                    value={password} 
                    minLength='8' 
                    onChange={this.handleChange} />
-            <button onClick={this.verifySignUp}>Sign Up</button>
-            <button onClick={this.verifySignIn}>Sign In</button>
+            <button className="button-signup form-button" onClick={this.verifySignUp}>Sign Up</button>
+            <button className="button-signin form-button" onClick={this.verifySignIn}>Sign In</button>
             <Link to='/' >
-              <button type='button'>Back To Movies</button> 
+              <button className="button__movies--back form-button" type='button'>Back To Movies</button> 
             </Link>
         </form>
       )
