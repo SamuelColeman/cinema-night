@@ -14,7 +14,9 @@ export const FavouritesContainer = ({ favouritesList, handleFavourite }) => {
 }
 	return (
 		<section>
+			<div className="favorites-card-container">
 			{mapFavorites}
+			</div>
 		</section>
 	)
 }
