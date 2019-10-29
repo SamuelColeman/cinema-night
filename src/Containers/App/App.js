@@ -8,7 +8,7 @@ import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MoviePage from '../MoviePage/MoviePage';
 import FavouritesContainer from '../FavouritesContainer/FavouritesContainer';
 import Form from '../Form/Form';
-import { Route, NavLink, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './App.css'
 
 export class App extends Component {
@@ -25,14 +25,15 @@ export class App extends Component {
   }
 
   signOutUser = () => {
-    let { currentUser } = this.props;
+    let { currentUser, favouritesList } = this.props;
     currentUser.name = '';
     currentUser.id = null;
-    currentUser.isSignedIn=false;
+    currentUser.isSignedIn = false;
+    favouritesList.favorites = [];
   }
 
   handleFavourite = (movie) => {
-    let { currentUser, errorMsg, hasError } = this.props;
+    let { currentUser, hasError } = this.props;
     if (currentUser.isSignedIn === true) {
       this.toggleFavourites(movie)
       hasError('');
@@ -41,23 +42,33 @@ export class App extends Component {
     }
   }
 
+  updateFavourites = (movie) => {
+    if (document.getElementById(movie.title)) {
+      document.getElementById(movie.title).removeAttribute('class');
+    } else {   
+      document.getElementById(movie.poster_path).setAttribute('hidden', 'true');
+    }
+  }
+
   toggleFavourites = async (movie) => {
     let { currentUser, favouritesList } = this.props;
     let currentMovie = favouritesList.favorites.find(film => film.title === movie.title);
-    if (currentMovie === undefined) { 
+    if (currentMovie === undefined) {
+        document.getElementById(movie.title).setAttribute('class', 'active');
         this.displayFavourites(currentUser.id);
         addFavourite(movie, currentUser.id);
         this.displayFavourites(currentUser.id);
       } else {
+        this.updateFavourites(currentMovie);
         this.removeFavourite(currentMovie);
       }
     this.displayFavourites(currentUser.id);
   }
 
   removeFavourite = async (movie) => {
-    const { favouritesList, currentUser } = this.props; 
+    const { currentUser } = this.props; 
      try {
-      const deletedmovies = await deleteFavorite(movie.user_id, movie.movie_id);
+      await deleteFavorite(movie.user_id, movie.movie_id);
     } catch (error) {
       hasError(error.message)
     }
@@ -71,7 +82,7 @@ export class App extends Component {
             favouritesList.favorites = resp.favorites;
           } catch (error) {
             console.log(error)
-          }
+      }
   }
 
   render() {
@@ -97,8 +108,7 @@ export const mapStateToProps = (state) => ({
   movies: state.movies,
   error: state.error,
   currentUser: state.currentUser,
-  favouritesList: state.favouritesList,
-  selectedMovie: state.selectedMovie
+  favouritesList: state.favouritesList
 });
 
 export const mapDispatchToProps = (dispatch) => (
@@ -121,14 +131,12 @@ App.propTypes = {
   favorites: PropTypes.arrayOf(PropTypes.object),
   getMovies: PropTypes.func,
   hasError: PropTypes.func,
-  isLoading: PropTypes.func,
-  selectedMovie: PropTypes.object
+  isLoading: PropTypes.func
 }
 
 App.defaultProps = { 
   isLoading: true,
   movies: [],
   currentUser: {},
-  favorites: [],
-  selectedMovie: {}
+  favorites: []
 }

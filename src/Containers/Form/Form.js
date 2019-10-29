@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import './Form.css'; 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login, signUp, favouritesList, hasError } from '../../actions';
+import { login, signUp, favouritesList, hasError } from '../../actions'
 import { Link } from 'react-router-dom';
-import MoviesContainer from '../../Containers/MoviesContainer/MoviesContainer';
-import PropTypes from 'prop-types';
-import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls';
+import PropTypes from 'prop-types'
+import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls'
 
 export class Form extends Component{
   constructor() {
@@ -55,7 +54,6 @@ export class Form extends Component{
       } else {
       this.setState({error: ''})
     }
-    console.log(resp.favorites)
   }
 
   verifySignUp = async e => {

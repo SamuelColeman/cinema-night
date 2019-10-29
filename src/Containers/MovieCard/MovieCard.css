@@ -39,3 +39,7 @@ button:hover {
 	background: white;
 	color: black;
 }
+
+.active {
+	background-color: red;
+}
