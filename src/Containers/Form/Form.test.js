@@ -62,11 +62,46 @@ describe('FormContainer',  () => {
            expect(wrapper).toMatchSnapshot();
        })
 
-       it('should update state when verifySignIn is called', async () => {
-        // const mockEvent = { preventDefault: jest.fn() };
-         await wrapper.instance().verifySignIn();
-         expect(wrapper.state('signUp')).toEqual(mockLogin);
+       it('should update state when verifySignIn is called', () => {
+         const mockEvent = {
+           preventDefault: jest.fn()
+         }
+
+         wrapper.setState({ email: 'bob@gmail.com', password: 'bob1234' });
+         wrapper.instance().verifySignIn(mockEvent);
+         expect(loginVerification).toHaveBeenCalledWith({ email: 'bob@gmail.com', password: 'bob1234'});
        })
+
+       it('should call loginVerification fetch when verifySignIn is called', () => {
+        wrapper.instance().verifySignIn();
+        expect(loginVerification).toHaveBeenCalled();
+      })
+
+      it('should update state when showFavourites is called', () => {
+          let mockMovieId = 4567;
+          wrapper.setState({ id: mockMovieId });
+          wrapper.instance().showFavourites(mockMovieId);
+          expect(getFavourites).toHaveBeenCalledWith(mockMovieId);
+      })
+
+      it('should call getFavourites fetch when showFavourites is called', () => {
+        wrapper.instance().showFavourites();
+        expect(getFavourites).toHaveBeenCalled();
+      })
+
+      it('should update state when verifySignUp is called', () => {
+        const mockEvent = {
+          preventDefault: jest.fn()
+        }
+        wrapper.setState({ name: 'pants', email: 'bob@gmail.com', password: 'bob1234'});
+        wrapper.instance().verifySignUp(mockEvent);
+        expect(signUpVerification).toHaveBeenCalledWith({ name: 'pants', email: 'bob@gmail.com', password: 'bob1234'});
+      })
+
+      it('should call signUpVerification fetch when verifySignUp is called', () => {
+        wrapper.instance().verifySignUp();
+        expect(signUpVerification).toHaveBeenCalled();
+      })
 
        it('should update local state of email when handle change is invoked', () => {
            const mockEvent = { 
@@ -167,9 +202,10 @@ describe('FormContainer',  () => {
 
     describe('mapDispatchToProps', () => {
       //login
+        const mockDispatch = jest.fn();
       it('should dispatch login when verifySignIn is called',  () => {
-          const mockDispatch = jest.fn();
-          const actionToDispatch = login('Bob', 1, false);
+    
+          const actionToDispatch = login({ name:'Bob', id: 1, isSignedIn: false });
 
           const mappedProps = mapDispatchToProps(mockDispatch);
           mappedProps.verifySignIn();
