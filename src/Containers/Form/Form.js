@@ -142,3 +142,10 @@ Form.propTypes = {
   password: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired
 }
+
+Form.defaultProps = {
+  currentUser: {},
+  email: '',
+  password: '',
+  error: ''
+}
