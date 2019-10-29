@@ -2,6 +2,7 @@ import React from 'react';
 import './MovieCard.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import fave from '../../images/transparent-heard.png'
 
 export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, handleFavourite, active }) => {
     let currentMovie =  movies.find(movie => movie.id === id);
@@ -16,14 +17,15 @@ export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, 
 
         return (
            <section className="movie_card" id={id}> 
+                <img src={fave} id={currentMovie.title} className= {active} onClick={() => handleFavourite(postedMovie)}></img>
+
                 <Link to={`/movies/${id}`}>
                     <div>
                         <h1>{ title }</h1>
                         <img className="movie__card--img" src={poster_path} alt={title} />
                         <h1>{ hasError }</h1>
                     </div>
-                </Link>
-                <button id={currentMovie.title} className={active} onClick={() => handleFavourite(postedMovie)}>Favorite</button>
+                </Link>    
             </section>
         )
 }   

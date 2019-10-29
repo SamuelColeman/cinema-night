@@ -1,6 +1,9 @@
 .favourites_card {
 	border: 1px solid black;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .favourites__card--title {
@@ -10,4 +13,5 @@
 
 .favourites__card--img {
 	width: 50%;
+	margin: 0;
 }

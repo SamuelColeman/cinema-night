@@ -1,6 +1,7 @@
 import React from 'react';
 import './FavouriteCard.css';
 import { connect } from 'react-redux';
+import fave from '../../images/transparent-heard.png'
 
 export const FavouriteCard = ({ handleFavourite, movie, hasError }) => {
         return (
