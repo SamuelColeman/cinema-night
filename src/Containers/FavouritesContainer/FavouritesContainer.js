@@ -19,7 +19,7 @@ export const FavouritesContainer = ({ favouritesList, handleFavourite }) => {
 			<Link to='/'>
 			<img className="button-back" src={back}></img>
 			</Link>
-			<h2>Favorites</h2>
+			<h2 className="favcontain__h2--title">Favorites</h2>
 			<div className="favorites-card-container">
 			{mapFavorites}
 			</div>

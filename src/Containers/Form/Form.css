@@ -37,5 +37,12 @@ form {
 
 .form-title {
   padding: 0;
+}
+
+.form__h1--title {
+  color: white;
+  margin-bottom: 5%;
+  font-size: 2em;
+  border-bottom: solid;
 
 }

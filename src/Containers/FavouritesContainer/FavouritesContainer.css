@@ -9,11 +9,15 @@
   border-radius: 40px;
   float: left;
   margin-left: 3%;
-  margin-top: 3%;
+  margin-top: 2.5%;
 
 
 }
 
 .button-back:hover {
   max-width: 5%
+}
+
+.favcontain__h2--title{
+  border-bottom:solid;
 }

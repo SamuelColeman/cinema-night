@@ -81,6 +81,7 @@ export class Form extends Component{
      const { email, password, error } = this.state;
     return (
         <form>
+            <h1 className="form__h1--title">Log In or Sign Up</h1>
             <h2 class="form__h2--email form-title">Email:</h2>
             <input className="form-input"
                    placeholder='Email' 
