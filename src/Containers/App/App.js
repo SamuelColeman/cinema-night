@@ -3,6 +3,7 @@ import { currentMovies, deleteFavorite, addFavourite, getFavourites } from '../.
 import { getMovies, isLoading, hasError } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
 
 // import MoviesContainer from '../../Components/MoviesContainer/MoviesContainer';
 
@@ -14,7 +15,6 @@ import { Route, NavLink, Link } from 'react-router-dom';
 import './App.css'
 
 class App extends Component {
-
   async componentDidMount() {
     const { getMovies, hasError, isLoading } = this.props;
     try {
@@ -36,10 +36,12 @@ class App extends Component {
   }
 
   handleFavourite = (movie) => {
-    let { currentUser, errorMsg, hasError } = this.props;
+    let { currentUser, errorMsg, hasError, favouritesList } = this.props;
     console.log(currentUser)
     if (currentUser.isSignedIn === true) {
       this.toggleFavourites(movie)
+      // let favoritedMovies = favouritesList.favorites.map(favorite => favorite.addClass('active'))
+      // console.log('------->', favoritedMovies)
       hasError('');
     } else {
       hasError('Must be signed in to favourite!');
@@ -58,15 +60,11 @@ class App extends Component {
         vote_average: movie.vote_average,
         overview: movie.overview
      }
-    console.log(currentMovie)
     if (currentMovie === undefined) { 
         this.displayFavourites(currentUser.id);
         addFavourite(postedMovie, currentUser.id);
         this.displayFavourites(currentUser.id);
-        console.log('here we go posting again')
       }
-      // addFavourite(postedMovie, currentUser.id);
-      // this.displayFavourites(currentUser.id);
       this.displayFavourites(currentUser.id);
       this.removeFavourite(currentMovie);
       this.displayFavourites(currentUser.id);
@@ -135,3 +133,25 @@ export const mapDispatchToProps = (dispatch) => (
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+App.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentUser: PropTypes.shape({
+    name: PropTypes.string,
+    id: PropTypes.number,
+    isSignedIn: PropTypes.bool
+  }),
+  favorites: PropTypes.arrayOf(PropTypes.object),
+  getMovies: PropTypes.func,
+  hasError: PropTypes.func,
+  isLoading: PropTypes.func,
+  selectedMovie: PropTypes.object
+}
+
+App.defaultProps = {
+  isLoading: true,
+  movies: [],
+  currentUser: {},
+  favorites: [],
+  selectedMovie: {}
+}
