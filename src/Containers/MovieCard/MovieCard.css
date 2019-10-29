@@ -1,3 +1,7 @@
+a {
+	text-decoration: none;
+}
+
 .movie_card {
 	border: 1px solid white;
 	width: 31%;
@@ -16,10 +20,12 @@
 	transform: scale(1.1); 
 	}
 
-h1 {
+.movie__card--title {
 	text-align: center;
 	font-size: 1.75em;
 	margin-top: 0;
+	color: #CFCBCA;
+	text-shadow: 4px 15px #30343f;
 }
 
 .movie__card--img {
@@ -37,12 +43,24 @@ button:hover {
 }
 
 section > img {
-	background-color: #CFCBCA;
-	max-width: 19%;
-	margin: 2% 2% 0% 79%;
+	background-color: rgba(207,203,202,.7);
+	width: 12%;
 	display: inline-block;
 }
 
 section > img:hover {
 	cursor: pointer
+}
+
+.movie__h1--error {
+	color: red;
+	font-size: 1em;
+	margin-top: 2%;
+	margin-right: 9%;
+	font-style: italic;
+}
+
+.movie__div--fave {
+	display: flex;
+	justify-content: flex-end;
 }
