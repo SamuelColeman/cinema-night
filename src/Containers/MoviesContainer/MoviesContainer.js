@@ -23,11 +23,6 @@ export const MoviesContainer = ({ currentUser, movies, signOutUser, selectMovie,
     )
   // }
   const loopMovies = movies.map((movie) => {
-    console.log('favorites list--->', favouritesList.favorites)
-    if(favouritesList.favorites.find(film => film.title === movie)) {
-      movie.className='isFavorited'
-      console.log('----->', movie)
-    }
       return <MovieCard key={movie.id}
               selectMovie={selectMovie}
                         {...movie} />
@@ -65,7 +60,7 @@ MoviesContainer.propTypes = {
   currentUser: PropTypes.object.isRequired,
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
   signOutUser: PropTypes.func.isRequired,
-  removeFavourite: PropTypes.func.isRequired,
+  removeFavourite: PropTypes.func,
   handleFavorite: PropTypes.func
 }
 
