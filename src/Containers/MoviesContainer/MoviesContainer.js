@@ -23,15 +23,13 @@ export const MoviesContainer = ({ currentUser, movies, signOutUser, selectMovie,
   // }
   const loopMovies = movies.map((movie) => {
     console.log('favorites list--->', favouritesList.favorites)
-    if(favouritesList.favorites.find(film => film.title === movie.title)) {
-      return <MovieCard status="isFavorited" key={movie.id}
-      selectMovie={selectMovie}
-                {...movie} />
-    } else {
-      return <MovieCard status="" key={movie.id}
+    if(favouritesList.favorites.find(film => film.title === movie)) {
+      movie.className='isFavorited'
+      console.log('----->', movie)
+    }
+      return <MovieCard key={movie.id}
               selectMovie={selectMovie}
                         {...movie} />
-    }
   })
     return (
         <section className='movies-containers'>
