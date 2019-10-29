@@ -3,8 +3,7 @@ import './MovieCard.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, handleFavourite }) => {
-
+export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, handleFavourite, active }) => {
     let currentMovie =  movies.find(movie => movie.id === id);
     let postedMovie = { 
         movie_id: currentMovie.id,
@@ -24,7 +23,7 @@ export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, 
                         <h1>{ hasError }</h1>
                     </div>
                 </Link>
-                <button onClick={() => handleFavourite(postedMovie)}>Favorite</button>
+                <button id={currentMovie.title} className={active} onClick={() => handleFavourite(postedMovie)}>Favorite</button>
             </section>
         )
 }   

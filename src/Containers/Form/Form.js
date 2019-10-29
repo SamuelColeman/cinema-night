@@ -54,7 +54,6 @@ export class Form extends Component{
       } else {
       this.setState({error: ''})
     }
-    console.log(resp.favorites)
   }
 
   verifySignUp = async e => {
@@ -106,7 +105,7 @@ export class Form extends Component{
    }
 }
 
-export const mapStateToProps = ({ currentUser, users }) => ({
+export const mapStateToProps = ({ currentUser, users}) => ({
     currentUser,
     users
 })
