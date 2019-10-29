@@ -5,7 +5,6 @@ import { isLoading } from './isLoading';
 import { currentUser } from './currentUser';
 import { users } from './signUp';
 import { favouritesList  } from './favouritesList';
-import { selectedMovie } from './selectedMovie';
 
 export const rootReducer = combineReducers({
     movies,
@@ -13,6 +12,5 @@ export const rootReducer = combineReducers({
     hasError,
     currentUser, 
     users,
-    favouritesList,
-    selectedMovie
+    favouritesList
 })
