@@ -18,21 +18,12 @@
 
 h1 {
 	text-align: center;
-  font-size: 30px;
+	font-size: 1.75em;
+	margin-top: 0;
 }
 
 .movie__card--img {
 	width: 79%;
-}
-
-button {
-	width: 40%;
-  height: 4%;
-  border-radius: 15px;
-  background: transparent;
-  color: white;
-  font-size: 15px;
-  margin: 4%;
 }
 
 button:hover {
@@ -41,5 +32,17 @@ button:hover {
 }
 
 .active {
-	background-color: red;
+	background: red;
+	max-width: 19%
+}
+
+section > img {
+	background-color: #CFCBCA;
+	max-width: 19%;
+	margin: 2% 2% 0% 79%;
+	display: inline-block;
+}
+
+section > img:hover {
+	cursor: pointer
 }
