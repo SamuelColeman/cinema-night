@@ -89,6 +89,20 @@ describe('FormContainer',  () => {
         expect(getFavourites).toHaveBeenCalled();
       })
 
+      it('should update state when verifySignUp is called', () => {
+        const mockEvent = {
+          preventDefault: jest.fn()
+        }
+        wrapper.setState({ name: 'pants', email: 'bob@gmail.com', password: 'bob1234'});
+        wrapper.instance().verifySignUp(mockEvent);
+        expect(signUpVerification).toHaveBeenCalledWith({ name: 'pants', email: 'bob@gmail.com', password: 'bob1234'});
+      })
+
+      it('should call signUpVerification fetch when verifySignUp is called', () => {
+        wrapper.instance().verifySignUp();
+        expect(signUpVerification).toHaveBeenCalled();
+      })
+
        it('should update local state of email when handle change is invoked', () => {
            const mockEvent = { 
                target : {
