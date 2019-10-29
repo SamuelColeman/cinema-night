@@ -7,32 +7,57 @@ describe('MoviesContainerOfContainers', () => {
 
   describe('MoviesContainer',  () => {
     let wrapper;
-    let mockFunction = jest.fn();
-    const mockMovies = [
-        {
+    let mockHandleFavourite = jest.fn();
+    let mockSignOutUser = jest.fn();
+    let mockMovies = [
+      { 
+        id: 456,
+        title: 'Harry Potter and the Sorceres Stone',
+        poster_path: 'https://pottersworld.com',
+        release_date: '10-02-10',
+        popularity: 462.91,
+        vote_avarage: 3775,
+        overview: 'yada yada',
+      },
+      { 
+        id: 457,
+        title: 'Harry Potter and the Sorceres Stone',
+        poster_path: 'https://pottersworld.com',
+        release_date: '10-02-10',
+        popularity: 462.91,
+        vote_avarage: 3775,
+        overview: 'yada yada',
+      }
+    ];
+    let mockCurrentUser = {
+        name: 'Bob',
+        id: 1,
+        isSignedIn: true
+    };
+    let mockFavouritesList = [
+        { 
           id: 456,
           title: 'Harry Potter and the Sorceres Stone',
+          poster_path: 'https://pottersworld.com',
+          release_date: '10-02-10',
           popularity: 462.91,
-          vote_count: 3775,
-          video: false,
-        },
-        {
-            id: 123,
-            title: 'Harry Potter and the Sorceres Stone',
-            popularity: 462.91,
-            vote_count: 3775,
-            video: false,
-          }
-    ]
+          vote_avarage: 3775,
+          overview: 'yada yada',
+        }
+    ];
+
 
     beforeEach(() => {
       wrapper = shallow( <MoviesContainer 
-            signOutUser={mockFunction}
-            selectMovie={mockFunction}
+        handleFavourite={mockHandleFavourite}
+        signOutUser={mockSignOutUser}
+        currentUser={mockCurrentUser}
+        movies={mockMovies}
+        favouritesList={mockFavouritesList}
       />)
     })
 
-    it.skip('should match snapshot with all data being passed in correctly', () => {
+    it('should match snapshot with all data being passed in correctly', () => {
         expect(wrapper).toMatchSnapshot();
     })
  })

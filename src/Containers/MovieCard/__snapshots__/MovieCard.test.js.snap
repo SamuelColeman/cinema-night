@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieCard should match snapshot with all data passing through correctly 1`] = `undefined`;
-
 exports[`MovieCardContainer MovieCard should match snapshot with all data passing through correctly 1`] = `
 <section
   className="movie_card"
