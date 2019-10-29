@@ -62,10 +62,9 @@ describe('FormContainer',  () => {
            expect(wrapper).toMatchSnapshot();
        })
 
-       it('should update state when verifySignIn is called', async () => {
-        // const mockEvent = { preventDefault: jest.fn() };
-         await wrapper.instance().verifySignIn();
-         expect(wrapper.state('signUp')).toEqual(mockLogin);
+       it('should call loginVerification fetch when verifySignIn is called', () => {
+         wrapper.instance().verifySignIn();
+         expect(loginVerification).toHaveBeenCalled();
        })
 
        it('should update local state of email when handle change is invoked', () => {
