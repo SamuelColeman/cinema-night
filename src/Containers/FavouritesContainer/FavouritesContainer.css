@@ -3,3 +3,17 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.button-back {
+  max-width: 4%;
+  border-radius: 40px;
+  float: left;
+  margin-left: 3%;
+  margin-top: 3%;
+
+
+}
+
+.button-back:hover {
+  max-width: 5%
+}
