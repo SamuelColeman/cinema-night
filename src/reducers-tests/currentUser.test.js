@@ -18,7 +18,11 @@ describe('currentUser', () => {
         isSignedIn: false
       }; 
     
-      const expected = mockUser;
+      const expected = { 
+        name: 'Bob',
+        id: 5,
+        isSignedIn: false
+      };
 
       const result = currentUser(undefined, mockUser);
 
