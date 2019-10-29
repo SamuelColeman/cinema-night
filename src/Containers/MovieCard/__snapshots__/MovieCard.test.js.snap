@@ -23,6 +23,7 @@ exports[`MovieCardContainer MovieCard should match snapshot with all data passin
     </div>
   </Link>
   <button
+    id="Harry Potter and the Sorceres Stone"
     onClick={[Function]}
   >
     Favorite

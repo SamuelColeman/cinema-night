@@ -44,6 +44,7 @@ exports[`MoviesContainerOfContainers MoviesContainer should match snapshot with 
     className="movies"
   >
     <Connect(MovieCard)
+      active="inactive"
       handleFavourite={[MockFunction]}
       id={456}
       key="456"
@@ -55,6 +56,7 @@ exports[`MoviesContainerOfContainers MoviesContainer should match snapshot with 
       vote_avarage={3775}
     />
     <Connect(MovieCard)
+      active="inactive"
       handleFavourite={[MockFunction]}
       id={457}
       key="457"

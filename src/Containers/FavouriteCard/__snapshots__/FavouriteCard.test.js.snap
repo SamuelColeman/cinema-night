@@ -3,6 +3,7 @@
 exports[`FavouriteCard should match snapshot with all data passing through correctly 1`] = `
 <section
   className="favourites_card"
+  id="/gibberish.jpg"
 >
   <h1
     className="favourites__card--title"
