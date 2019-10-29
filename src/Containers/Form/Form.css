@@ -1,0 +1,12 @@
+form {
+	height: 100vh;
+	margin: 0px;
+}
+
+input {
+	width: 72vh;
+  height: 6vh;
+  font-size: 4vh;
+  background: transparent;
+  color: white;
+}
