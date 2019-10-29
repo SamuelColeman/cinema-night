@@ -36,7 +36,6 @@ describe('FormContainer',  () => {
        ];
        let mockError = 'Error';
   
-
        beforeEach(() => {
            wrapper = shallow (<Form 
                 currentUser={mockCurrentUser} 
@@ -62,7 +61,7 @@ describe('FormContainer',  () => {
            expect(wrapper).toMatchSnapshot();
        })
 
-       it('should update state when verifySignIn is called', () => {
+       it('should update verifySignIn state when verifySignIn is called', () => {
          const mockEvent = {
            preventDefault: jest.fn()
          }
@@ -168,10 +167,6 @@ describe('FormContainer',  () => {
 
        expect(wrapper.find(Link)).toHaveLength(1);
     })
-       // test verifySignIn async
-       // showFavourites async
-       // verifySignUp async
-       // snapshot test
 
     });
 
@@ -201,19 +196,67 @@ describe('FormContainer',  () => {
     });
 
     describe('mapDispatchToProps', () => {
-      //login
+      
+      let mockSignUp = {
+        name: 'pants',
+        email: 'bob@gmail.com',
+        password: 'bob12345'
+       };
+
+      let mockLogin = { 
+        name:'Bob', 
+        id: 1, 
+        isSignedIn: false 
+      };
+     
+      let mockFavouritesList = [
+        { 
+          id: 456,
+          title: 'Harry Potter and the Sorceres Stone',
+          poster_path: 'https://pottersworld.com',
+          release_date: '10-02-10',
+          popularity: 462.91,
+          vote_avarage: 3775,
+          overview: 'yada yada',
+        }
+       ];
+
         const mockDispatch = jest.fn();
       it('should dispatch login when verifySignIn is called',  () => {
-    
-          const actionToDispatch = login({ name:'Bob', id: 1, isSignedIn: false });
+          const actionToDispatch = login(mockLogin);
 
           const mappedProps = mapDispatchToProps(mockDispatch);
-          mappedProps.verifySignIn();
+          mappedProps.login(mockLogin);
 
           expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      });
+
+      it('should dispatch signup when verifySignUp is called', () => {
+         const actionToDispatch = signUp(mockSignUp);
+
+         const mappedProps = mapDispatchToProps(mockDispatch);
+         mappedProps.signUp(mockSignUp);
+
+         expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
       })
-      //signup
-      //favouritesList
-      //hasError
+    
+      it('should dispatch favouritesList when showFavourites is called', () => {
+        const actionToDispatch = favouritesList(mockFavouritesList);
+
+        const mappedProps = mapDispatchToProps(mockDispatch);
+        mappedProps.favouritesList(mockFavouritesList);
+
+        expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      })
+
+      it('should dispatch hasError when verifySignIn is called', () => {
+         const actionToDispatch = hasError('');
+
+         const mappedProps = mapDispatchToProps(mockDispatch);
+         mappedProps.hasError('');
+
+         expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      })
+     
     });
 })
