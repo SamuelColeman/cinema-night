@@ -1,6 +1,8 @@
 import { favouritesList } from '../reducers/favouritesList';
 
-it('should return the initial state', () => {
+
+describe('favoritesList', () => {
+  it('should return the initial state', () => {
     const expected = [];
 
     const result = favouritesList(undefined, []);
@@ -34,4 +36,5 @@ it.skip('should return state with a new updated List', () => {
     const expected = mockList;
     const result = favouritesList(undefined, mockFavList);
     expect(result).toEqual(expected);
+})
 })

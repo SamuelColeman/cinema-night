@@ -1,22 +1,29 @@
-import { signUp } from '../reducers/signUp';
+import { users } from '../reducers/signUp';
 
-it('should return the initial state', () => {
-    const expected = {};
-
-    const result = signUp(undefined, {});
-
-    expect(result).toEqual(expected);
-});
-
-it('should return state with a new updated List', () => {
-
-    const mockFavList = {
-      type: 'FAVOURITES_LIST',
-        name: action.name,
-        email: action.email,
-        password: action.password
-    }
-    const expected = mockList;
-    const result = signUp(undefined, mockFavList);
-    expect(result).toEqual(expected);
+describe('signUp', () => {
+    it('should return the initial state', () => {
+        const expected = {};
+    
+        const result = users(undefined, {});
+    
+        expect(result).toEqual(expected);
+    });
+    
+    it('should return state with a new updated List', () => {
+    
+        const mockList = {
+          type: 'SIGN_UP_USER',
+            name: 'Bob',
+            email: 'bob@gmail.com',
+            password: '12345'
+        }
+    
+        const expected = {
+            name: 'Bob',
+            email: 'bob@gmail.com',
+            password: '12345'
+        };
+        const result = users(undefined, mockList);
+        expect(result).toEqual(expected);
+    })
 })
