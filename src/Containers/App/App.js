@@ -26,6 +26,7 @@ export class App extends Component {
 
   signOutUser = () => {
     let { currentUser, favouritesList } = this.props;
+    currentUser.email = '';
     currentUser.name = '';
     currentUser.id = null;
     currentUser.isSignedIn = false;

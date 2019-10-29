@@ -83,6 +83,7 @@ describe('App', () => {
       name:'Pants',
       id:2,
       email:'pants@gmail.com',
+      isSignedIn: true
     }
 
       currentMovies.mockImplementation(() => {
@@ -102,38 +103,33 @@ describe('App', () => {
   beforeEach(() => {
     wrapper = shallow(<App 
         movies = {mockMovies}
-        favouriteList = {mockFavouriteList}
+        favouritesList = {mockFavouriteList}
         removeFavourite = {mockRemoveFavourite}
         currentUser = {mockUser}
         isLoading = {mockIsLoading}
      />)
  })
 
-it('should match snapshot with correct data passing through', () => {
+  it('should match snapshot with correct data passing through', () => {
     expect(wrapper).toMatchSnapshot();
-  })
+  });
 
-it('should update loading, fetch movies, and setCoWorkers after mounting', () => {
+  it('should update loading and fetch movies', () => {
     expect(mockIsLoading).toHaveBeenCalledWith(true);
     expect(currentMovies).toHaveBeenCalled();
     expect(mockIsLoading).toHaveBeenCalledWith(false);
   });
 
-it('should get favourites when display favourites is called', async () => {
+  it('should invoke get favourites when display favourites is called', async () => {
   await wrapper.instance().displayFavourites(mockUser.id)
-  expect(getFavourites).toHaveBeenCalled();
-})
-  // it('should clear currentUser and favouritesList when signOutUser is called', () => {
-  //   let currentUser = mockUser;
-  //   let favouritesList = mockFavouriteList.favorites;
-  //   wrapper.instance().signOutUser();
-  //   expect(currentUser).toEqual({ name: '', id: null, isSignedIn: false });
-  //   expect(favouritesList).toEqual([]);
-  // })
+  expect(getFavourites).toHaveBeenCalledWith(mockUser.id);
+  });
 
-
-  // test hasError to have been called
-  // test change of state, will need to go over redux testing class
+  it('should clear currentUser and favouritesList when signOutUser is called', () => {
+    wrapper.instance().signOutUser();
+    expect(mockUser).toEqual({ email: '', name: '', id: null, isSignedIn: false });
+    expect(mockFavouriteList.favorites).toEqual([]);
+  });
 })
 
 
