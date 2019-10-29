@@ -125,7 +125,7 @@ App.propTypes = {
   selectedMovie: PropTypes.object
 }
 
-App.defaultProps = {
+App.defaultProps = { 
   isLoading: true,
   movies: [],
   currentUser: {},
