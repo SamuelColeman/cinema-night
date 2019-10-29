@@ -35,6 +35,10 @@ form {
   color: white;
 }
 
+.form-error {
+  color: red;
+}
+
 .form-title {
   padding: 0;
 }

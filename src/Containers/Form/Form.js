@@ -89,7 +89,7 @@ export class Form extends Component{
                    name='email'
                    value={email} 
                    onChange={this.handleChange} />
-            <h1>{error}</h1>
+            <h1 class="form-error">{error}</h1>
             <h2 class="form__h2--password form-title">Password:</h2>
             <input className="form-input"
                    placeholder='Password must 8 characters' 
