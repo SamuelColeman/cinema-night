@@ -6,24 +6,49 @@ describe('MovieCardContainer', () => {
 
     describe('MovieCard', () => {
         let wrapper;
-        let mockFunction = jest.fn();
-        let chosenMovie =  {
+        let mockHandleFavourite = jest.fn();
+        let chosenMovie = {
             id: 456,
             title: 'Harry Potter and the Sorceres Stone',
+            poster_path: 'https://pottersworld.com',
+            release_date: '10-02-10',
             popularity: 462.91,
-            vote_count: 3775, 
-            video: false,
-          }
+            vote_avarage: 3775,
+            overview: 'yada yada',
+          };
+          let mockMovies = [
+              { 
+                id: 456,
+                title: 'Harry Potter and the Sorceres Stone',
+                poster_path: 'https://pottersworld.com',
+                release_date: '10-02-10',
+                popularity: 462.91,
+                vote_avarage: 3775,
+                overview: 'yada yada',
+              },
+              { 
+                id: 457,
+                title: 'Harry Potter and the Sorceres Stone',
+                poster_path: 'https://pottersworld.com',
+                release_date: '10-02-10',
+                popularity: 462.91,
+                vote_avarage: 3775,
+                overview: 'yada yada',
+              }
+          ];
+          let mockError = 'Error';
     
         beforeEach(() => {
           wrapper = shallow(<MovieCard 
             key={chosenMovie.id}
-            selectMovie={mockFunction}
+            handleFavourite={mockHandleFavourite}
+            movies={mockMovies}
+            hasError={mockError}
             {...chosenMovie}
           />)
         })
     
-        it.skip('should match snapshot with all data passing through correctly', () => {
+        it('should match snapshot with all data passing through correctly', () => {
             expect(wrapper).toMatchSnapshot();
         })
      })

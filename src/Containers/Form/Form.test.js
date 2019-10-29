@@ -4,27 +4,77 @@ import { MemoryRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Form, mapStateToProps, mapDispatchToProps } from './Form';
 import { login, signUp, favouritesList, hasError } from '../../actions';
+import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls';
 
+jest.mock('../../apiCalls');
 
-describe('FormContainer',  () => {
-
+describe('FormContainer',  () => { 
+   
     describe('Form', () => {
-       // test handleChange
        let wrapper; 
+       let mockCurrentUser = {
+        name: 'Bob',
+        id: 1,
+        isSignedIn: true
+       };
+       let mockLogin = mockCurrentUser;
+       let mockSignUp = {
+          name: 'Bob',
+          email: 'bob@gmail.com',
+          password: 'bob12345'
+       };
+       let mockFavouritesList = [
+        { 
+          id: 456,
+          title: 'Harry Potter and the Sorceres Stone',
+          poster_path: 'https://pottersworld.com',
+          release_date: '10-02-10',
+          popularity: 462.91,
+          vote_avarage: 3775,
+          overview: 'yada yada',
+        }
+       ];
+       let mockError = 'Error';
+  
 
        beforeEach(() => {
-           wrapper = shallow (<Form />)
+           wrapper = shallow (<Form 
+                currentUser={mockCurrentUser} 
+                login={mockLogin} 
+                signUp={mockSignUp} 
+                favouritesList={mockFavouritesList} 
+                hasError={mockError} />);
+
+          loginVerification.mockImplementation(() => {
+              return Promise.resolve(mockLogin);
+          });
+
+          signUpVerification.mockImplementation(() => {
+              return Promise.resolve(mockSignUp);
+          });
+
+          getFavourites.mockImplementation(() => {
+              return Promise.resolve(mockCurrentUser.id);
+          })
        })
 
        it('should match snapshot with all information passing through', () => {
            expect(wrapper).toMatchSnapshot();
        })
 
+       it('should update state when verifySignIn is called', async () => {
+        // const mockEvent = { preventDefault: jest.fn() };
+         await wrapper.instance().verifySignIn();
+         expect(wrapper.state('signUp')).toEqual(mockLogin);
+       })
+
        it('should update local state of email when handle change is invoked', () => {
-           const mockEvent = { target : {
+           const mockEvent = { 
+               target : {
                name: 'email',
                value: 'bob@gmail.com',
-           } }
+             } 
+           }
 
            const expected = 'bob@gmail.com';
 
@@ -34,17 +84,19 @@ describe('FormContainer',  () => {
        })
 
        it('should update local state of password when handle change is invoked', () => {
-        let mockEvent = { target : {
-            name: 'password',
-            value: 'bobstheword1234',
-        } }
+         let mockEvent = { 
+           target : {
+             name: 'password',
+             value: 'bobstheword1234',
+           } 
+         };
 
-        const expected = 'bobstheword1234';
+         const expected = 'bobstheword1234';
+ 
+         wrapper.instance().handleChange(mockEvent);
 
-        wrapper.instance().handleChange(mockEvent);
-
-        expect(wrapper.state('password')).toEqual(expected);
-      })
+         expect(wrapper.state('password')).toEqual(expected);
+       })
 
        it('should call verifySignIn when sign in button is clicked', () => {
            wrapper.instance().verifySignIn = jest.fn();
@@ -59,15 +111,15 @@ describe('FormContainer',  () => {
        })
 
        it('should call verifySignUp when sign up button is clicked', () => {
-        wrapper.instance().verifySignUp = jest.fn();
+          wrapper.instance().verifySignUp = jest.fn();
 
-        const mockEvent = { preventDefault: jest.fn() };
+          const mockEvent = { preventDefault: jest.fn() };
 
-        wrapper.instance().forceUpdate();
+          wrapper.instance().forceUpdate();
 
-        wrapper.find('button').at(0).simulate('click', mockEvent);
+          wrapper.find('button').at(0).simulate('click', mockEvent);
 
-        expect(wrapper.instance().verifySignUp).toHaveBeenCalled();
+          expect(wrapper.instance().verifySignUp).toHaveBeenCalled();
     })
 
     it('should redirect back to main page when button is clicked', () => {

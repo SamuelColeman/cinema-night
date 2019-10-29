@@ -3,7 +3,7 @@ import FavouriteCard from '../FavouriteCard/FavouriteCard';
 import './FavouritesContainer.css';
 import { connect } from 'react-redux';
 
-const FavouritesContainer = ({ favouritesList, handleFavourite }) => {
+export const FavouritesContainer = ({ favouritesList, handleFavourite }) => {
 	let mapFavorites;
 	if (favouritesList.favorites === undefined) {
 		mapFavorites = <h1>Error: Login</h1>
