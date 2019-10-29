@@ -19,7 +19,6 @@ export const loginVerification = async (info) => {
 
   const resp = await fetch('http://localhost:3001/api/v1/login', options)
   const data = await resp.json();
-  // console.log('fetch data-->', data)
   return data
 }
 
@@ -34,7 +33,6 @@ export const signUpVerification = async (info) => {
 
   const resp = await fetch('http://localhost:3001/api/v1/users', options)
   const data = await resp.json();
-  // console.log('fetch data-->', data)
   return data
 }
 
@@ -55,7 +53,6 @@ export const addFavourite = async ( movie, id ) => {
 export const getFavourites = async ( id ) => {
   const resp =  await fetch(`http://localhost:3001/api/v1/users/${id}/moviefavorites`);
   const data = await resp.json();
-  console.log('get', data)
   return data
 }
 
@@ -69,6 +66,5 @@ export const deleteFavorite = async ( userId, movieId ) => {
 
   const resp =  await fetch(`http://localhost:3001/api/v1/users/${userId}/moviefavorites/${movieId}`, options);
   const data = await resp.json();
-  console.log('delete', resp)
   return data
 }

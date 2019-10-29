@@ -2,9 +2,9 @@ import React from 'react';
 import './MovieCard.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { addFavourite } from '../../apiCalls';
 
-export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, selectMovie, favouritesList}) => {
+export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, handleFavourite }) => {
+
     let currentMovie =  movies.find(movie => movie.id === id);
     let postedMovie = { 
         movie_id: currentMovie.id,
@@ -22,11 +22,9 @@ export const MovieCard = ({ title, poster_path, overview, id, movies, hasError, 
                         <h1>{ title }</h1>
                         <img className="movie__card--img" src={poster_path} alt={title} />
                         <h1>{ hasError }</h1>
-                        {/* addFavourite( postedMovie, currentUser.id ) */}
-                        {/* removeFavourite(id) */}
                     </div>
                 </Link>
-                <button onClick={(e) => selectMovie(e, postedMovie)}>Favorite</button>
+                <button onClick={() => handleFavourite(postedMovie)}>Favorite</button>
             </section>
         )
 }   

@@ -4,7 +4,6 @@ import './FavouritesContainer.css';
 import { connect } from 'react-redux';
 
 const FavouritesContainer = ({ favouritesList, handleFavourite }) => {
-	console.log(favouritesList.favorites)
 	let mapFavorites;
 	if (favouritesList.favorites === undefined) {
 		mapFavorites = <h1>Error: Login</h1>

@@ -3,12 +3,10 @@ import './Form.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login, signUp, favouritesList, hasError } from '../../actions'
+// import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import { Link } from 'react-router-dom';
 import MoviesContainer from '../../Containers/MoviesContainer/MoviesContainer'
-import { Route, Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
-// import { Link } from 'react-router-dom';
-// import MoviesContainer from '../../Components/MoviesContainer/MoviesContainer'
-
 import { loginVerification, signUpVerification, getFavourites } from '../../apiCalls'
 
 export class Form extends Component{
@@ -22,7 +20,6 @@ export class Form extends Component{
   }
 
   handleChange = (e) => {
-    // e.preventDefault()
     this.setState({ [e.target.name]: e.target.value });
   }
 
