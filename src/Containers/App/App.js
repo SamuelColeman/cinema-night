@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
-import  MoviePage  from '../MoviePage/MoviePage'
+import { MoviePage } from '../MoviePage/MoviePage';
 import FavouritesContainer from '../FavouritesContainer/FavouritesContainer';
 import Form from '../Form/Form';
 import { Route } from 'react-router-dom';
