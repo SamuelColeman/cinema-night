@@ -15,6 +15,7 @@ exports[`MovieCardContainer MovieCard should match snapshot with all data passin
       <img
         alt="Harry Potter and the Sorceres Stone"
         className="movie__card--img"
+        src="https://pottersworld.com"
       />
       <h1>
         Error
