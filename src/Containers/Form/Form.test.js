@@ -36,7 +36,6 @@ describe('FormContainer',  () => {
        ];
        let mockError = 'Error';
   
-
        beforeEach(() => {
            wrapper = shallow (<Form 
                 currentUser={mockCurrentUser} 
@@ -62,7 +61,7 @@ describe('FormContainer',  () => {
            expect(wrapper).toMatchSnapshot();
        })
 
-       it('should update state when verifySignIn is called', () => {
+       it('should update verifySignIn state when verifySignIn is called', () => {
          const mockEvent = {
            preventDefault: jest.fn()
          }
