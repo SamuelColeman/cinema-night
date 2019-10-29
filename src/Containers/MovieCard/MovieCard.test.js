@@ -1,25 +1,151 @@
+//  import React from 'react';
+//  import { shallow } from 'enzyme';
+//  import MovieCard from './MovieCard';
+
+//  describe('MovieCard', () => {
+
+//     let wrapper;
+//     let chosenMovie =  { 
+//         id: 456,
+//         title: 'Harry Potter and the Sorceres Stone',
+//         poster_path: 'https://pottersworld.com',
+//         release_date: '10-02-10',
+//         popularity: 462.91,
+//         vote_avarage: 3775,
+//         overview: 'yada yada', 
+//       };
+//     let mockCurrentUser = {
+//       name: 'Bob',
+//       id: 1,
+//       isSignedIn: true
+//     };
+//     let mockMovies = [
+//       { 
+//         id: 456,
+//         title: 'Harry Potter and the Sorceres Stone',
+//         poster_path: 'https://pottersworld.com',
+//         release_date: '10-02-10',
+//         popularity: 462.91,
+//         vote_avarage: 3775,
+//         overview: 'yada yada',
+//       },
+//       { 
+//         id: 457,
+//         title: 'Harry Potter and the Sorceres Stone',
+//         poster_path: 'https://pottersworld.com',
+//         release_date: '10-02-10',
+//         popularity: 462.91,
+//         vote_avarage: 3775,
+//         overview: 'yada yada',
+//       }
+//     ];
+//     let mockFavouritesList = [
+//       { 
+//         id: 456,
+//         title: 'Harry Potter and the Sorceres Stone',
+//         poster_path: 'https://pottersworld.com',
+//         release_date: '10-02-10',
+//         popularity: 462.91,
+//         vote_avarage: 3775,
+//         overview: 'yada yada',
+//       }
+//     ];
+//     let mockHandleFavourite = jest.fn();
+//     let mockHasError = 'Error';
+
+//     beforeEach(() => {
+//       wrapper = shallow(<MovieCard 
+//         handleFavourite = {mockHandleFavourite}
+//         movies={mockMovies}
+//         hasError={mockHasError}
+//          {...chosenMovie}
+//       />)
+//     })
+
+//     it('should match snapshot with all data passing through correctly', () => {
+//         expect(wrapper).toMatchSnapshot();
+//     })
+//  })
+
  import React from 'react';
- import { shallow } from 'enzyme';
- import MovieCard from './MovieCard';
+import { shallow } from 'enzyme';
+import { MovieCard, mapStateToProps } from './MovieCard';
 
- describe('MovieCard', () => {
+describe('MovieCardContainer', () => {
 
-    let wrapper;
-    let chosenMovie =  {
-        id: 456,
-        title: 'Harry Potter and the Sorceres Stone',
-        popularity: 462.91,
-        vote_count: 3775,
-        video: false,
-      }
+    describe('MovieCard', () => {
+        let wrapper;
+        let mockHandleFavourite = jest.fn();
+        let chosenMovie = {
+            id: 456,
+            title: 'Harry Potter and the Sorceres Stone',
+            popularity: 462.91,
+            vote_count: 3775, 
+            video: false,
+          };
+          let mockMovies = [
+              { 
+                id: 456,
+                title: 'Harry Potter and the Sorceres Stone',
+                poster_path: 'https://pottersworld.com',
+                release_date: '10-02-10',
+                popularity: 462.91,
+                vote_avarage: 3775,
+                overview: 'yada yada',
+              },
+              { 
+                id: 457,
+                title: 'Harry Potter and the Sorceres Stone',
+                poster_path: 'https://pottersworld.com',
+                release_date: '10-02-10',
+                popularity: 462.91,
+                vote_avarage: 3775,
+                overview: 'yada yada',
+              }
+          ];
+          let mockError = 'Error'
+    
+        beforeEach(() => {
+          wrapper = shallow(<MovieCard 
+            key={chosenMovie.id}
+            handleFavourite={mockHandleFavourite}
+            movies={mockMovies}
+            hasError={mockError}
+            {...chosenMovie}
+          />)
+        })
+    
+        it('should match snapshot with all data passing through correctly', () => {
+            expect(wrapper).toMatchSnapshot();
+        })
+     })
 
-    beforeEach(() => {
-      wrapper = shallow(<MovieCard 
-         {...chosenMovie}
-      />)
-    })
+     describe('mapStateToProps', () => {
+        it('should return an object with the movies state',  () => {
+            const mockState = {
+               movies: [{
+                id: 456,
+                title: 'Harry Potter and the Sorceres Stone',
+                popularity: 462.91,
+                vote_count: 3775, 
+                video: false,
+                }],
+               filter: 'GET_MOVIES'
+            };
 
-    it('should match snapshot with all data passing through correctly', () => {
-        expect(wrapper).toMatchSnapshot();
-    })
- })
+            const expected = {
+              movies: [{
+                id: 456,
+                title: 'Harry Potter and the Sorceres Stone',
+                popularity: 462.91,
+                vote_count: 3775, 
+                video: false,
+                }]
+            };
+
+            const mappedProps = mapStateToProps(mockState);
+
+            expect(mappedProps).toEqual(expected);
+        })
+     })
+})
