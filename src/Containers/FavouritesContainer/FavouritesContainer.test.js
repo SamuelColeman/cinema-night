@@ -25,4 +25,15 @@ describe('Favourites Container', () => {
         }
     ];
 
-    
+    beforeEach(() => {
+      wrapper = shallow( <FavouritesContainer 
+        handleFavourite={mockHandleFavourite}
+        favouritesList={mockFavouritesList}
+      />)
+    })
+
+    it('should match snapshot with all data being passed in correctly', () => {
+        expect(wrapper).toMatchSnapshot();
+    })
+ })
+
