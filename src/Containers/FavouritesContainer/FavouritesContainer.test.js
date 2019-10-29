@@ -37,3 +37,33 @@ describe('Favourites Container', () => {
     })
  })
 
+  describe('mapStateToProps', () => {
+    it('should return an object with the favorite movies state', () => {
+      const mockState = {
+        favouritesList: [{
+          "poster_path": "/gibberish.jpg",
+          "movie_id": 222222,
+          "title": "A title",
+          "vote_average": 11,
+          "overview": "It's cool.",
+          "release_date": "2019-10-18"
+        }]
+      };
+
+      const expected = {
+        favouritesList: [{
+          "poster_path": "/gibberish.jpg",
+          "movie_id": 222222,
+          "title": "A title",
+          "vote_average": 11,
+          "overview": "It's cool.",
+          "release_date": "2019-10-18"
+        }]
+      };
+
+      const mappedProps = mapStateToProps(mockState);
+
+      expect(mappedProps).toEqual(expected);
+    })
+  })
+
